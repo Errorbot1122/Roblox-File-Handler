@@ -47,7 +47,20 @@ function lerp(start, end, amt){
   return (1 - amt) * start + amt * end
 }
 
+/**
+ * @param {Number} num - the number you want to convert
+ * 
+ * @returns {}
+ */
+function toBytesInt32(num) {
+  arr = new ArrayBuffer(4); // an Int32 takes 4 bytes
+  view = new DataView(arr);
+  view.setUint32(0, num, false); // byteOffset = 0; litteEndian = false
+  return arr;
+}
+
 module.exports.math = {
   reMap: reMap,
-  lerp: lerp
+  lerp: lerp,
+  toBytesInt32: toBytesInt32
 }

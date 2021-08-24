@@ -137,12 +137,15 @@ class Instance {
   }
 
   IsA(className) {
+
     if (!_isDistroyed) {
+
       return this instanceof RoModules.Classes[className]
     }
   }
 
   IsAncestorOf(descendant) {
+    
     if (!_isDistroyed) {
 
       let parent = descendant.Parent
@@ -158,6 +161,21 @@ class Instance {
       }
 
     }
+  }
+
+
+  /**
+   * @param {Instance} ancestor - The ancestor Instance.
+   * 
+   * @returns {Boolean} True if the Instance is a descendant of the given ancestor.
+   */
+  IsDescendantOf(ancestor) {
+
+    if (!_isDistroyed) {
+
+      return ancestor.IsAncestorOf(this)
+    }
+
   }
  
 }

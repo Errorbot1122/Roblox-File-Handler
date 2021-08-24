@@ -7,6 +7,9 @@ class Model extends PVInstance {
 
     super();
 
+    this.ClassName = "Model"
+
+
     /**
      * @type {CFrame}
      * [notreplicated]

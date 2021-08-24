@@ -1,9 +1,6 @@
-/**
- * mainly from https://developer.roblox.com/en-us/api-reference/class/BasePart
- * @module BasePart
- */
+// mainly from https://developer.roblox.com/en-us/api-reference/class/BasePart
 
-const RoEnums = require('../RoModules.js')
+const RoEnums = require('../RoModules.js').Enum
 
 const SurfaceType = RoEnums.SurfaceType
 const Material = RoEnums.Material

@@ -2,44 +2,62 @@
  * @typedef {Object} Item
  * @property {Object} $ - Xml Tags
  * @property {String} $.class - The item's class
- * @property {Array} Properties - An array of properties 
- * @property {Array<Item>=} Item - An array of its children
+ * @property {String} $.referent - The item's class
+ * @property {Array=} Properties - An array of properties 
+ * @property {Array<Item>} Item - An array of its children
  */
-/**
- * @typedef {}
- */
+
+
 
 const fs = require('fs');
 const xml2js = require('xml2js');
 const util = require('util');
-const RoModules = require('./RoModules.js')
-const RoClasses = RoModules.Classes
-const RoEnums = RoModules.Enum
+const colors = require("colors/safe");
 
-/*
-const TOKENNAMETOENUMTYPE = {
-  BackSurface: "SurfaceType",
-  BottomSurface: "SurfaceType",
-  FrontSurface: "SurfaceType",
-  LeftSurface: "SurfaceType",
-  RightSurface: "SurfaceType",
-  TopSurface: "SurfaceType",
-  BackSurfaceInput: "InputType",
-  BottomSurfaceInput: "InputType",
-  FrontSurfaceInput: "InputType",
-  LeftSurfaceInput: "InputType",
-  RightSurfaceInput: "InputType",
-  TopSurfaceInput: "InputType"
-  
-}
-*/
-
-const Instance = RoClasses.Instance
+const RoModules = require('./RoModules.js');
+const RoClasses = RoModules.Classes;
+const RoEnums = RoModules.Enum;
+const Instance = RoClasses.Instance;
 
 const xmlParser = new xml2js.Parser();
 
+const packageName = "Roblox File Parser";
+
 let REFIDTOINSTANCE = {}
 
+let debug = false;
+let showStack = true;
+let showExtraData = true;
+
+colors.setTheme({
+  silly: 'rainbow',
+  input: 'grey',
+  verbose: 'cyan',
+  prompt: 'grey',
+  info: 'green',
+  data: 'gray',
+  help: 'cyan',
+  warn: 'yellow',
+  debug: 'blue',
+  error: 'red'
+
+});  
+
+/**
+ * @param {*} x - The object you want to convert
+ * @returns {{value:*}}
+ */
+function toObject(x) {
+
+  return {value: x}
+}
+
+/**
+ * check if the xml_Tag is the parse-able/parsed XML Tag
+ * 
+ * @param {*} xml_Tag - The object to check
+ * @returns {Boolean}
+*/
 function isXMLTag(xml_Tag) {
   let isParsed = (typeof xml_Tag === "object")
   
@@ -52,34 +70,51 @@ function isXMLTag(xml_Tag) {
     return false
   }
   else {
+    
     xmlParser.parseString(xml_Tag, (err, result) => {
-      return isXML(result, true)
+
+      return isXMLTag(result, true)
     });
 	};
 }
 
+/**
+ * check if the item is the Item type
+ * 
+ * @param {*} item - The object to check
+ * @returns {Boolean}
+ */
 function isItem(item) {
-  return isXMLTag(item) && item.$.referent
+
+  return (isXMLTag(item) && item.$.referent) || item.isParsed
 }
 
 
 /**
+ * converts a referent id, item, or 
+ * 
  * @param {String|Item|Instance} instance - the instance you want to convert
- * @returns {Instance | Boolean}
+ * @returns {Instance}
  */
 function convertValidInstance(instance) {
-  if (typeof instance === "string") {
 
-    return REFIDTOINSTANCE[instance]
-  }
-  else if (instance instanceof Instance) {
+  if (instance) {
 
-    return instance
-  }
-  else if (isItem(instance)) {
+    if (typeof instance === "string") {
 
-    return convertItemToInstance(instance)
+      return REFIDTOINSTANCE[instance]
+    }
+    else if (instance instanceof Instance) {
+
+      return instance
+    }
+    else if (isItem(instance)) {
+
+      return convertItemToInstance(instance)
+    }
   }
+
+  return null
 }
 
 /**
@@ -107,47 +142,85 @@ function findFirstItemByClassName(itemList, className, parent) {
     }
   }
 
-  return
+  return null
 }
 
 /**
  * @param {Item} item - The Item you want convert
  * @param {String|Item|Instance} parent - The item's parent
- * @return {Instance}
+ * @return {Instance|Item}
  */
 function convertItemToInstance(item, parent) {
-  console.log(parent)
 
-  parent = convertValidInstance(parent)
+  // Vars
+  let children = item.Item
+  
+  let propertyTypes = item.Properties[0];
+
+  let returnInstClassName = item.$.class;
+
+  let convertedChildren = []
 
   let returnInst = null;
 
-  propertyTypes = item.Properties[0];
+  let referentId = item.$.referent;
 
-  returnInstClassName = item.$.class;
+
+  parent = convertValidInstance(parent)
   
+  if (referentId != null) {
+    REFIDTOINSTANCE[referentId] = item;
+  }
+
   try {
-    
+
     returnInst = new RoClasses[returnInstClassName]();
   }
   catch(err) {
 
-    console.log(`\n
-    Sorry,\n
-    but the package currently not support the Instance class. I will try to fix it ASAP. In the mean time you can report it to GitHub. ${returnInstClassName}, ${err}\n`);
+    if (debug) {
 
-    return null
+      console.log(colors.warn(`\n  Sorry,\n  but the package, ${packageName}, currently not support the Instance class '${returnInstClassName}'. We will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`));
+
+      if (showStack) {
+
+        console.log(colors.info(`\nStacktrace:\n==================\n${err.stack}\n`))
+      }
+    }
+
+    item.isParsed = false;
+    return item;
   }
 
-  returnInst.referentId = item.$.referent
+  returnInst.isParsed = true
+
+  returnInst.Parent = parent;
+
+  if (referentId != null) {
+    
+    returnInst.referentId = referentId;
+    
+    REFIDTOINSTANCE[referentId] = returnInst;
+  }
+
+  if (children) {
   
-  REFIDTOINSTANCE[returnInst.referentId] = returnInst
+    children.forEach((child, i) => {
+
+      convertedChildren[i] = convertItemToInstance(child, returnInst)
+    });
+  }
+  
+  returnInst.Children = convertedChildren
 
   for (const propertyTypeKey in propertyTypes) {
+
     const propertyType = propertyTypes[propertyTypeKey];
+
     console.log(propertyTypeKey)
 
     propertyType.forEach(property => {
+
       propertyValue = property._;
       propertyName = property.$.name;
       
@@ -177,50 +250,66 @@ function convertItemToInstance(item, parent) {
 
           returnInst[propertyName] = REFIDTOINSTANCE[propertyValue]
           break;
-        case "vector3":
+        case "color3uint8":
 
-          returnInst[propertyName] = new RoClasses.Vector3(
-            Number(property.X), 
-            Number(property.Y), 
-            Number(property.Z)
-          )
+          returnInst[propertyName] = new RoClasses.Color3uint8(Number(propertyValue))
+
+          console.log(returnInst[propertyName])
           break;
         default:
+            
+          try {
 
-          if (propertyValue) {
+            let datatype;
+            //console.log(propertyValue, propertyTypeKey)
 
-            try {
+            if (propertyValue == null) { 
 
-              returnInst[propertyName] = JSON.parse(propertyValue)
-            } 
-            catch(err) {
-              /*
-              Old Text
+              datatype = new RoClasses[propertyTypeKey]();
 
-              `\n
-                ERROR:\n
-                Could not set ${propertyValue} to the value ${propertyName} from ${returnInst.name}. ${err}
-                \n`
-              */ 
-              console.log(
-                `\n
-                Sorry,\n 
-                currently the the datatype ${propertyType} is currently not suppourted, I will try to fix it ASAP. In the mean time you can report it to GitHub.\n
-                ${err}\n`
-              )
+
+              for (const datatypeValueKey in datatype) {
+
+                const newPropertyValue = property[datatypeValueKey]
+                
+                if (property[datatypeValueKey]) {
+                  
+                  datatype[datatypeValueKey] = JSON.parse(newPropertyValue)
+                }
+              }
+            }
+
+            returnInst[propertyName] = (datatype) ? datatype : JSON.parse(propertyValue)
+          } 
+          catch(err) { 
+
+            if (debug) {
+              
+              console.log(colors.warn(`\n  Sorry, \n\n  but the package, ${packageName}, currently not support the datatype ${propertyTypeKey} is currently not suppourted with the proprety '${propertyName}', I will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`))
+            
+              if (showExtraData) {
+                
+                console.log(colors.data(`\nValue: ${propertyValue}\n`))
+              }
+              if (showStack) {
+                
+                console.log(colors.info(`Stacktrace:\n==================\n${err.stack}\n\n`))
+              }
             }
           }
 
-          break; 
+        break; 
       }
-
     });
   }
+
   return returnInst;
 }
 
 fs.readFile('robloxExample.rbxlx', (err, data) => {
+
 	xmlParser.parseString(data, (err, result) => {
+
     let newXml = result.roblox;
 
     isXMLTag(findFirstItemByClassName(newXml.Item, "Part"))

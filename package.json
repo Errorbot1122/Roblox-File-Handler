@@ -1,6 +1,6 @@
 {
   "name": "Roblox-File-Parser",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Parse .rbxlx or .rbxmx files",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "xml2js": "^0.4.23"
   }
 }
