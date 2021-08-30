@@ -1,6 +1,6 @@
-const Instence = require('./Instance.js');
+const Instance = require('./Instance.js');
 
-class PVInstance extends Instence {
+class PVInstance extends Instance {
   constructor() {
     
     super();

@@ -10,5 +10,6 @@ module.exports = {
   Color3: require('./Color3.js'),
   FormFactorPart: require('./FormFactorPart.js'),
   Part: require('./Part.js'),
-  Color3uint8: require('./Color3uint8.js')
+  Color3uint8: require('./Color3uint8.js'),
+  GuiService: require('./GuiService.js')
 }
