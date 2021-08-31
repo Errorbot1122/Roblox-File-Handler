@@ -1,15 +1,30 @@
-module.exports = {
-  Instance: require('./Instance.js'),
-  PVInstance: require('./PVInstance.js'),
-  BasePart: require('./BasePart.js'),
-  BaseVector: require('./BaseVector.js'),
-  Vector3: require('./Vector3.js'),
-  CFrame: require('./CFrame.js'),
-  Model: require('./Model.js'),
-  Workspace: require('./Workspace.js'),
-  Color3: require('./Color3.js'),
-  FormFactorPart: require('./FormFactorPart.js'),
-  Part: require('./Part.js'),
-  Color3uint8: require('./Color3uint8.js'),
-  GuiService: require('./GuiService.js')
-}
+// Import the filesystem module
+const fs = require("fs");
+
+const directory_name = "Classes";
+
+let exportRequired = {}
+
+// Function to get current filepaths
+// in directory
+let filepaths = fs.readdirSync(directory_name);
+  
+
+filepaths.forEach((filepath) => {
+
+  let fileExtentionIndex = filepath.indexOf(".")
+
+  if (fileExtentionIndex != -1) {
+
+    let extention = filepath.slice(fileExtentionIndex)
+    let fileName = filepath.slice(0, fileExtentionIndex)
+
+    if (extention == ".js" && fileName != "RoClasses") {
+      
+      exportRequired[fileName] = require(`./${filepath}`)
+    }
+  }
+  
+});
+
+module.exports = exportRequired
