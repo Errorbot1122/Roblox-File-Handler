@@ -61,3 +61,5 @@ class Terrain extends BasePart {
   
   }
 }
+
+module.exports = Terrain;
