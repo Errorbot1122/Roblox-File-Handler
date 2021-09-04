@@ -59,8 +59,15 @@ function toBytesInt32(num) {
   return arr;
 }
 
+function isValidPath(path) {
+
+    return fs.existsSync(path) && (fs.lstatSync(dirPath).isDirectory() || fs.lstatSync(dirPath).isFile());
+  }
+
+
 module.exports.math = {
-  reMap: reMap,
-  lerp: lerp,
-  toBytesInt32: toBytesInt32
+  reMap,
+  lerp,
+  toBytesInt32,
+  isValidPath
 }

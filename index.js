@@ -8,6 +8,109 @@
  */
 
 
+class Parser {
+  
+  constructor(options, data) {
+    
+    const optionDefaults = {
+      
+      REFIDTOINSTANCE: {},
+      type: "auto"
+    }
+
+    this.options = optionDefaults
+
+    if (options) {
+
+      for (const optionKeys in options) {
+        
+        switch(optionKeys) {
+          
+          case "type":
+            this.options["type"] = options.toLowerCase()
+            break;
+
+          default:
+            this.options[optionKeys] = options[optionKeys]
+            break;
+        }
+      }
+    }
+  }
+
+  parse(x, callback, type) {
+    
+    type = (type && this.options.type != "auto") ? type.toLowerCase() : this.options.type
+
+    switch(type) {
+
+      case "auto":
+
+        if (Globles.isValidPath(x)) {
+          
+          parse(x, "file");
+        }
+        else if(isXMLTag(x)) {
+
+          parse(x, "xml");
+        } 
+        else {
+
+          callback([new Error("Invalid Prameter 'x' for parse.")])
+        }
+        break;
+      
+      case "file":
+        if (Globles.isValidPath(x)) {
+
+          parseFile(x, callback);
+        }
+        break;
+
+      case "xml":
+
+        if (isXMLTag(x)) {
+          
+          xmlToObject(x, (errs, newObj) => {
+
+            return objectToInsts(newObj);
+          });
+        }
+        break;
+      
+    }
+  }
+}
+
+class Data {
+  constructor(options) {
+    const optionDefaults = {
+      
+      REFIDTOINSTANCE: {}
+    }
+
+    this.options = optionDefaults
+
+    if (options) {
+
+      for (const optionKeys in options) {
+
+        this.options[optionKeys] = options[optionKeys]
+      }
+    }
+  }
+
+  createParser(extraOptions) {
+
+    newOptions = {
+      ...this.options,
+      ...extraOptions
+    }
+    
+    return new Parser(newOptions, this);
+  }
+}
+
 
 const fs = require('fs');
 const xml2js = require('xml2js');
@@ -15,6 +118,8 @@ const util = require('util');
 const colors = require("colors/safe");
 
 const RoModules = require('./RoModules.js');
+const Globles = require('./Globles.js');
+
 const RoClasses = RoModules.Classes;
 const RoTypes = RoModules.Datatypes;
 const RoEnums = RoModules.Enum;
@@ -43,15 +148,6 @@ colors.setTheme({
   error: 'red'
 
 });  
-
-/**
- * @param {*} x - The object you want to convert
- * @returns {{value:*}}
- */
-function toObject(x) {
-
-  return {value: x}
-}
 
 /**
  * check if the xml_Tag is the parse-able/parsed XML Tag
@@ -87,7 +183,7 @@ function isXMLTag(xml_Tag) {
  */
 function isItem(item) {
 
-  return (isXMLTag(item) && item.$.referent) || item.isParsed
+  return (isXMLTag(item) && item.$.referent) || !item.isParsed
 }
 
 
@@ -218,8 +314,6 @@ function convertItemToInstance(item, parent) {
 
     const propertyType = propertyTypes[propertyTypeKey];
 
-    console.log(propertyTypeKey)
-
     propertyType.forEach(property => {
 
       propertyValue = property._;
@@ -255,14 +349,12 @@ function convertItemToInstance(item, parent) {
 
           returnInst[propertyName] = new RoTypes.Color3uint8(Number(propertyValue))
 
-          console.log(returnInst[propertyName])
           break;
         default:
             
           try {
 
             let datatype;
-            //console.log(propertyValue, propertyTypeKey)
 
             if (propertyValue == null) { 
 
@@ -307,13 +399,95 @@ function convertItemToInstance(item, parent) {
   return returnInst;
 }
 
-fs.readFile('robloxExample.rbxlx', (err, data) => {
+function fileToObject(path, callback) {
+  fs.readFile(path, (rErr, data) => {
 
-	xmlParser.parseString(data, (err, result) => {
+    xmlParser.parseString(data, (xErr, jsObject) => {
 
-    let newXml = result.roblox;
+      callback([rErr, xErr], jsObject, path);
+    })
+  })
+}
 
-    isXMLTag(findFirstItemByClassName(newXml.Item, "Part"))
-    console.log(convertItemToInstance(findFirstItemByClassName(newXml.Item, "Part")));
-	});
-});
+function xmlToObject(xml, callback) {
+
+  xmlParser.parseString(xml, (xErr, jsObject) => {
+
+    callback([rErr, xErr], jsObject, path);
+  })
+}
+
+function objectToInsts(objs) {
+  
+  if (Array.isArray(objs)) {
+    
+    let returnArray = []
+
+    objs.forEach(obj => {
+      
+      returnArray.push(objectToInsts(obj))
+    })
+
+    return returnArray
+  }
+  else if (objs.Item) {
+    
+    return objectToInsts(objs.Item)
+  }
+  else if (isItem(objs)) {
+    
+    return convertItemToInstance(objs)
+  } 
+}
+
+function parseFile(path, callback) {
+
+  fileToObject(path, (errs, result) => {
+
+    if (result.roblox) {
+    
+      const nexXMLObj = result.roblox
+      let newInstences = []
+
+      items = nexXMLObj.Item
+
+      items.forEach(item => {
+        
+        newInstences.push(convertItemToInstance(item))
+      })
+
+      callback(errs, newInstences)
+    }
+  });
+}
+
+let newData = new Data();
+let parser = newData.createParser()
+
+parser
+
+parseFile("robloxExample.rbxlx", console.log)
+
+module.exports = {
+  Classes: {
+    ...RoClasses,
+    ...RoTypes,
+    Parser,
+    Data
+  },
+  Roblox: {
+    Classes: RoClasses,
+    Datatypes: RoTypes,
+    Enum: RoEnums
+  },
+  isXMLTag,
+  isItem,
+  convertValidInstance,
+  findFirstItemByClassName,
+  fileToObject,
+  xmlToObject,
+  objectToInsts,
+  parseFile,
+  Data,
+  Parser,
+}
