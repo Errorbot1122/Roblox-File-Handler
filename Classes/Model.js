@@ -1,5 +1,5 @@
 const PVInstance = require('./PVInstance.js');
-const CFrame = require('./CFrame.js');
+const CFrame = require('../Datatypes/CFrame.js');
 const BasePart = require('./BasePart');
 
 class Model extends PVInstance {

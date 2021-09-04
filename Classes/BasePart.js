@@ -6,9 +6,10 @@ const SurfaceType = RoEnums.SurfaceType
 const Material = RoEnums.Material
 
 const PVInstance = require('./PVInstance.js')
-const CFrame = require('./CFrame.js')
-const Color3 = require('./Color3.js')
-const Vector3 = require('./Vector3.js')
+
+const CFrame = require('../Datatypes/CFrame.js')
+const Color3 = require('../Datatypes/Color3.js')
+const Vector3 = require('../Datatypes/Vector3.js')
 
 class BasePart extends PVInstance {
   constructor() {

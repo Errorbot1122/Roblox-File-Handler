@@ -16,6 +16,7 @@ const colors = require("colors/safe");
 
 const RoModules = require('./RoModules.js');
 const RoClasses = RoModules.Classes;
+const RoTypes = RoModules.Datatypes;
 const RoEnums = RoModules.Enum;
 const Instance = RoClasses.Instance;
 
@@ -231,7 +232,7 @@ function convertItemToInstance(item, parent) {
           break;
         case "coordinateframe":
 
-          returnInst[propertyName] = new RoClasses.CFrame(
+          returnInst[propertyName] = new RoTypes.CFrame(
             Number(property.X), 
             Number(property.Y), 
             Number(property.Z), 
@@ -252,7 +253,7 @@ function convertItemToInstance(item, parent) {
           break;
         case "color3uint8":
 
-          returnInst[propertyName] = new RoClasses.Color3uint8(Number(propertyValue))
+          returnInst[propertyName] = new RoTypes.Color3uint8(Number(propertyValue))
 
           console.log(returnInst[propertyName])
           break;
@@ -265,7 +266,7 @@ function convertItemToInstance(item, parent) {
 
             if (propertyValue == null) { 
 
-              datatype = new RoClasses[propertyTypeKey]();
+              datatype = new RoTypes[propertyTypeKey]();
 
 
               for (const datatypeValueKey in datatype) {
