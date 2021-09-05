@@ -102,7 +102,7 @@ class Data {
 
   createParser(extraOptions) {
 
-    newOptions = {
+    let newOptions = {
       ...this.options,
       ...extraOptions
     }
@@ -489,5 +489,5 @@ module.exports = {
   objectToInsts,
   parseFile,
   Data,
-  Parser,
+  Parser
 }
