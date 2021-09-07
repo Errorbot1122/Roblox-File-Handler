@@ -461,13 +461,6 @@ function parseFile(path, callback) {
   });
 }
 
-let newData = new Data();
-let parser = newData.createParser()
-
-parser
-
-parseFile("robloxExample.rbxlx", console.log)
-
 module.exports = {
   Classes: {
     ...RoClasses,
