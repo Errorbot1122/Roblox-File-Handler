@@ -1,0 +1,1 @@
+npm i -g --sava-dev jsdoc-md
