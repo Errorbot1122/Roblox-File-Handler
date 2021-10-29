@@ -1,0 +1,27 @@
+
+# Documentation
+This is all the full on documentation for Roblox File Handler
+
+## Table Of Contents
+
+* [Functions](#functions)
+    {{#functions}}
+    * [**`{{longname}}({{#each params}} {{this.name}} {{/each}})`:** {{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}](#{{id}})
+    {{/functions}}
+
+## <a name='functions'> Functions </a> 
+
+{{#functions}}
+### <a name='{{id}}'> **`{{longname}}({{#each params}} {{this.name}} {{/each}})`:** {{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}</a>
+
+{{description}}
+
+**Kind**: {{scope}}, *{{kind}}*
+
+| Name | Type(s) | Description |
+| :---: | :---: | :---: |
+{{#each params}}| `{{this.name}}` | {{#each this.type.names}} *`{{this}}`* {{/each}}| {{this.description}} | {{/each}}
+
+**Returns**: {{#each returns}}{{#each this.type.names}}`{{this}}` {{/each}}{{/each}}
+
+{{/functions}}
