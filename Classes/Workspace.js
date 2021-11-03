@@ -1,5 +1,11 @@
 const Model = require('./Model.js')
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdec A service in which any objects that are to be rendered in the 3D world exist
+ */
 class Workspace extends Model {
   constructor() {
     

@@ -2,6 +2,12 @@ const PVInstance = require('./PVInstance.js');
 const CFrame = require('../Datatypes/CFrame.js');
 const BasePart = require('./BasePart');
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdesc Models are container objects, meaning they group objects together. They are best used to hold collections of BaseParts and have a number of functions that extend their functionality.
+ */
 class Model extends PVInstance {
   constructor() {
 

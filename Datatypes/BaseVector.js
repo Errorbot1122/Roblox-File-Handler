@@ -1,5 +1,9 @@
 const Globel = require('../Globles.js')
 
+/**
+ * @class
+ * @classdesc The base class for all Vecter Objects in this packege
+ */
 class BaseVector {
   constructor(...values) {
 

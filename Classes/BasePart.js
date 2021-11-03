@@ -1,4 +1,6 @@
-// mainly from https://developer.roblox.com/en-us/api-reference/class/BasePart
+/**
+ * mainly from https://developer.roblox.com/en-us/api-reference/class/BasePart
+ */
 
 const RoEnums = require('../RoModules.js').Enum
 
@@ -11,9 +13,22 @@ const CFrame = require('../Datatypes/CFrame.js')
 const Color3 = require('../Datatypes/Color3.js')
 const Vector3 = require('../Datatypes/Vector3.js')
 
+/**
+ * @class
+ * @inheritdoc
+
+ * @classdesc A base class used to make a 3d objects 
+ * Inharates [PVInstance]{@link PVInstance}
+ */
 class BasePart extends PVInstance {
+  /**
+   * Init the part
+   * @constructor
+   */
   constructor() {
+
     super();
+
     /**
      * @type {Boolean}
      * Determines whether a part is immovable by physics

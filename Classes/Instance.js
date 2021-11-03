@@ -1,5 +1,9 @@
 const RoModules = require('../RoModules')
 
+/**
+ * @class 
+ * @classdesc Instance is the base class for all classes in the Roblox class hierarchy. Every other class that the Roblox engine defines inherits all of the members of Instance. 
+ */
 class Instance {
   constructor() {
 

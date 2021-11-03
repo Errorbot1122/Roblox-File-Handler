@@ -2,8 +2,14 @@ const Globles = require('../Globles.js')
 const Color3 = require('./Color3.js')
 const BaseVector = require('./BaseVector.js')
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdesc Color3 but in the well know [0, 255] range
+ */
 class Color3uint8 extends BaseVector {
-  constructor(x, g, b, a=255) {
+  constructor(x, g, b, a = 255) {
     
     super(a, x, g, b)
 

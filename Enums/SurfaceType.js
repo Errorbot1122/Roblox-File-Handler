@@ -1,5 +1,5 @@
 /**
- * @enum {Number}
+ * @enum {Number} Used to determine how a surface should be displayed on a part and how automatic surface joints should behave.
  */
 const SurfaceType = {
 

@@ -1,5 +1,12 @@
 const Instance = require('./Instance')
 
+/**
+ * @class
+ * @inheritdoc
+ * 
+ * @classdesc The GuiService is a service which currently allows developers to control what GuiObject is currently being selected by the gamepad navigator.
+ * Inharates {@link Instance}
+ */
 class GuiService extends Instance {
   constructor() {
     

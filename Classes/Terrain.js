@@ -1,5 +1,11 @@
 const BasePart = require('./BasePart.js')
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdesc Create dynamically morphable environments
+ */
 class Terrain extends BasePart {
   constructor() {
     /** 

@@ -2,7 +2,7 @@
  * 
  * Maps a given range from a specific iterator to a new range.
  * 
- * Credit to RoyallyFlushed (https://www.roblox.com/users/profile?username=RoyallyFlushed) for the code!!! [https://devforum.roblox.com/t/lua-map-command/215342]
+ * Credit to [RoyallyFlushed]{@link https://www.roblox.com/users/profile?username=RoyallyFlushed} for the code!!! (https://devforum.roblox.com/t/lua-map-command/215342)
  * 
  * @param {Number} n - The number you want to map 
  * @param {Number} start - The starting number of the original range

@@ -1,5 +1,5 @@
 /**
- * @enum {Number}
+ * @enum {Number} All the roblox materials
  */
 const Material = {
   /** Applies to BasPart only. */
@@ -110,12 +110,14 @@ const Material = {
   /** Applies to Terrain only. */
   Pavement: 836,
 
-  /** Applies to BasPart only; see details.
-   * https://developer.roblox.com/en-us/articles/force-field-material.
+  /** 
+   * Applies to BasPart only; 
+   * @see https://developer.roblox.com/en-us/articles/force-field-material
    */
   ForceField: 1584	
   
 }
+
 Object.freeze(Material);
 
 module.exports = Material

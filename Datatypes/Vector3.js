@@ -1,5 +1,11 @@
 const BaseVector = require('./BaseVector.js')
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdesc An avrage Vector3 value
+ */
 class Vector3 extends BaseVector {
   constructor(x=0, y=0, z=0) {
     

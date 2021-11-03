@@ -1,5 +1,9 @@
 const Vector3 = require('./Vector3.js');
 
+/**
+ * @class
+ * @classdesc CFrame, short for coordinate frame, is a data type that describes a 3D position and orientation
+ */
 class CFrame {
   constructor(x=0, y=0, z=0, R00=0, R01=0, R02=0, R10=0, R11=0, R12=0, R20=0, R21=0, R22=0) {
     
@@ -28,6 +32,7 @@ class CFrame {
   }
 
   /**
+   * @private
    * 
    * @param {Vector3} [v3] - Abrv fo Vector3
    * @param {Number | String} [type] - 0 = XYZ, 1 = RightVector, 2 = UpVector, 3 = LookVector, 4 = XVector, 5 = YVector, 6 = ZVector

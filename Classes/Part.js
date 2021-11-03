@@ -4,6 +4,12 @@ const PartType = RoEnums.PartType
 
 const FormFactorPart = require('./FormFactorPart.js');
 
+/**
+ * @inheritdoc
+ * @class
+ * 
+ * @classdesc A physical object in the Roblox world
+ */
 class Part extends FormFactorPart {
   constructor() {
     
