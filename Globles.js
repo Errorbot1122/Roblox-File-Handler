@@ -16,8 +16,8 @@
 function reMap(n, start, stop, newStart, newStop, withinBounds=false) {
 
   /**
-   * @type {Number}
    * The calulated re-map (Not constrained)
+   * @type {Number}
    */
   let value = ((n - start) / (stop - start)) * (newStop - newStart) + newStart
   
@@ -41,7 +41,8 @@ function reMap(n, start, stop, newStart, newStop, withinBounds=false) {
  * @param {Number} start - The starting number in the range.
  * @param {Number} end - The ending number in the range.
  * @param {Number} amt - the amount you want to interpolate between 0 and 1. (can go above or below 0 - 1, but not recommended)
- *  @return {Number}
+ * 
+ * @return {Number}
  */
 function lerp(start, end, amt){
   return (1 - amt) * start + amt * end

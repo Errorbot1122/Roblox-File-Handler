@@ -2,7 +2,7 @@
  * mainly from https://developer.roblox.com/en-us/api-reference/class/BasePart
  */
 
-const RoEnums = require('../RoModules.js').Enum
+const RoEnums = require('../dont_doc/RoEnums').Enum
 
 const SurfaceType = RoEnums.SurfaceType
 const Material = RoEnums.Material
@@ -30,74 +30,74 @@ class BasePart extends PVInstance {
     super();
 
     /**
-     * @type {Boolean}
      * Determines whether a part is immovable by physics
-     */ 
+      * @type {Boolean}
+    */ 
     this.Anchored = false;
 
     /**
-     * @type {Vector3}
      * [notreplicated]
      * The angular velocity of the part’s assembly
+     * @type {Vector3}
      */ 
     this.AssemblyAngularVelocity;
 
     /**
-     * @type {Vector3}
      * [readonly] [notreplicated]
      * The center of mass of the part’s assembly in world space
+     * @type {Vector3}
      */  
     this.AssemblyCenterOfMass;
 
     /**
-     * @type {Vector3}
      * [notreplicated]
      * The linear velocity of the part’s assemblyworld space
+     * @type {Vector3}
      */   
     this.AssemblyLinearVelocity;
     
     /**
-     * @type {Number}
      * [readonly] [notreplicated]
      * The total mass of the part’s assembly
+     * @type {Number}
      */    
     this.AssemblyMass;
     
     /**
-     * @type {BasePart}
      * [readonly] [notreplicated]
      * A reference to the root part of the assembly
+     * @type {BasePart}
      */ 
     this.AssemblyRootPart;
     
     /**
-     * @type {SurfaceType}
      * Determines the type of surface for the Back face of a part (+Z direction)
+     * @type {SurfaceType}
      */  
     this.BackSurface;
 
     /**
-     * @type {SurfaceType}
      * Determines the type of surface for the Bottom face of a part (-Y direction)
+     * @type {SurfaceType}
      */
     this.BottomSurface;
     
     /**
-     * @type {BrickColor}
      * [notreplicated]
      * Determines the color of a part.
+     * @type {BrickColor}
      */ 
     this.BrickColor;
 
     /**
-     * @type {CFrame}
      * Determines the position and rotation of a part in the world
+      * @type {CFrame}
      */  
     this.CFrame;
 
     /**
-     * @type {Boolean}
      * Determines whether a part may collide with other parts.
+     * @type {Boolean}
      */   
     this.CanCollide;
 
@@ -107,175 +107,175 @@ class BasePart extends PVInstance {
     this.CanQuery;
 
     /**
-     * @type {Boolean}
      * Determines if the part will trigger Touched/TouchEnded events on other BaseParts with TouchTransmitters
+     * @type {Boolean}
      */   
     this.CanTouch;
 
     /**
-     * @type {Boolean}
      * Determines whether or not a part casts a shadow
+     * @type {Boolean}
      */   
     this.CastShadow;
 
     /**
-     * @type {Vector3} 
      * [readonly] [notreplicated]
      * Describes the world position in which a part’s center of mass is located.
+     * @type {Vector3} 
      */ 
     this.CenterOfMass;
     
     /**
-     * @type {Number}
      * Describes the automatically-set ID number of a part’s collision group
+     * @type {Number}
      */
     this.CollisionGroupId;
     
     /**
-     * @type {Color3}
      * [notreplicated]
      * Determines the color of a part.
+     * @type {Color3}
      */
     this.Color;
     
     /**
+    * Determines several physical properties of a part
      * @type {PhysicalProperties}
-     * Determines several physical properties of a part
      */
     this.CustomPhysicalProperties;
     
     /**
-     * @type {SurfaceType}
      * Determines the type of surface for the Front face of a part (-Z direction)
+     * @type {SurfaceType}
      */ 
     this.FrontSurface;
     
     /**
-     * @type {SurfaceType}
      * Determines the type of surface for the Left face of a part (-X direction)
+    * @type {SurfaceType}
      */ 
     this.LeftSurface;
     
     /**
-     * @type {Number}
      * [hidden] [notreplicated]
      * Determines a multiplier for BasePart.Transparency that is only visible to the local client
+     * @type {Number}
      */  
     this.LocalTransparencyModifier;
     
     /**
-     * @type {Boolean}
      * Determines whether a part is selectable in Studio.
+     * @type {Boolean}
      */  
     this.Locked;
     
 
     /**
-     * @type {Number}
      * [readonly] [notreplicated]
      * Describes the mass of the part, the product of its density and volume
+     * @type {Number}
      */  
     this.Mass;
 
     /**
-     * @type {Number}
      * Determines whether the part contributes to the total mass or inertia of its rigid body
+     * @type {Number}
      */   
     this.Massless;
 
     /**
-     * @type {Material}
      * Determines the texture and default physical properties of a part
+     * @type {Material}
      */  
     this.Material;
 
     /**
-     * @type {Vector3}
      * [notreplicated]
-     * Describes the position of the part in the world
+     * Describes the position of the part in the world  
+     * @type {Vector3}
      */  
     this.Orientation;
     
 
     /**
-     * @type {CFrame}
      * Specifies the offset of the part’s pivot from its CFrame.
+     * @type {CFrame}
      */   
     this.PivotOffset;
     
 
     /**
-     * @type {Vector3}
      * [notreplicated]
      * Describes the position of the part in the world
+     * @type {Vector3}
      */   
     this.Position;
     
 
      /**
-     * @type {Number}
      * [hidden] [readonly] [notreplicated]
      * Time since last recorded physics update
+     * @type {Number}
      */    
     this.ReceiveAge;
     
 
     /**
-     * @type {Number}
      * Determines how much a part reflects the skybox.
+     * @type {Number}
      */  
     this.Reflectance;
 
     /**
-     * @type {Number}
-     * [readonly] [notreplicated]
+     * * [readonly] [notreplicated]
      * Describes the smallest change in size allowable by the Resize method
+     * @type {Number}
      */ 
     this.ResizeIncrement;
     
     /**
-     * @type {Faces}
      * [readonly] [notreplicated]
-    Describes the faces on which a part may be resized
-     */  
+     * Describes the faces on which a part may be resized
+     * @type {Faces}
+    */  
     this.ResizeableFaces;
 
     /**
-     * @type {SurfaceType}
      * Determines the type of surface for the Right face of a part (+X direction)
+     * @type {SurfaceType}
      */ 
     this.RightSurface;
     
 
     /**
-     * @type {Number}
      * The main rule in determining the root part of an assembly
+     * @type {Number}
      */  
     this.RootPriority;
 
     /**
-     * @type {Vector3}
      * [notreplicated]
      * The rotation of the part in degrees for the three axes
+     * @type {Vector3}
      */  
     this.Rotation;
 
     /**
-     * @type {Vector3}
      * [notreplicated]
      * Determines the dimensions of a part (length, width, height)
+     * @type {Vector3}
      */  
     this.Size;
 
     /**
-     *  @type {SurfaceType}
      * Determines the type of surface for the Top face of a part (+Y direction)
+     * @type {SurfaceType}
      */ 
     this.TopSurface;
     
     /**
-     * @type {Number}
      * Determines how much a part can be seen through (the inverse of part opacity)
+     * @type {Number}
      */ 
     this.Transparency;
     

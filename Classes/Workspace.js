@@ -14,14 +14,17 @@ class Workspace extends Model {
     this.ClassName = "Workspace"
 
     /**
-     * @type {Boolean} 
      * [notreplicated]
-    Determines whether assets created by other uses can be sold in the game.
+     * Determines whether assets created by other uses can be sold in the game.
+     * 
+     * @type {Boolean} 
      */
     this.AllowThirdPartySales = false
     
-    /** @type {NewAnimationRuntimeSetting}
+    /** 
      * [notscriptable]
+     * 
+     * @type {NewAnimationRuntimeSetting}
      */
     this.AnimationWeightedBlendFix
     
@@ -31,35 +34,40 @@ class Workspace extends Model {
     this.ClientAnimatorThrottling
 
     /** 
-     * @type {Camera}
      * [notreplicated]
-    The Camera object being used by the local player.
+     * The Camera object being used by the local player.
+     * 
+     * @type {Camera}
      */
     this.CurrentCamera    
 
     /**
-     * @type {Number} 
      * [notreplicated]
      * The amount of time, in seconds, that the game has been running.
+     * 
+     * @type {Number} 
      */
     this.DistributedGameTime
 
     /**
-     * @type {Number} 
      * Determines the height at which falling BaseParts (and their ancestor Models) are destroyed
+     * 
+     * @type {Number} 
      */
     this.FallenPartsDestroyHeight
     
     /**
-     * @type {Number} 
      * Determines the acceleration due to gravity applied to falling BaseParts.
+     * 
+     * @type {Number} 
      */ 
     this.Gravity
     
 
     /**
-     * @type {HumanoidOnlySetCollisionsOnStateChange} 
      * [notscriptable]
+     * 
+     * @type {HumanoidOnlySetCollisionsOnStateChange} 
      */  
     this.HumanoidOnlySetCollisionsOnStateChange
     
@@ -69,68 +77,77 @@ class Workspace extends Model {
     this.InterpolationThrottling
 
     /**
-     * @type {MeshPartHeadsAndAccessories} 
      * [notscriptable]
+     * @type {MeshPartHeadsAndAccessories} 
      */
     this.MeshPartHeadsAndAccessories
 
     /**
-     * @type {PhysicsSimulationRate} 
      * [hidden] [notreplicated]
+     * 
+     * @type {PhysicsSimulationRate} 
      */
     this.PhysicsSimulationRate
     
     /**
-     * @type {PhysicsSteppingMethod} 
      * [notscriptable]
+     * 
+     * @type {PhysicsSteppingMethod} 
      */
     this.PhysicsSteppingMethod
 
     /**
-     * @type {SignalBehavior} 
      * [notscriptable]
+     * 
+     * @type {SignalBehavior} 
      */ 
     this.SignalBehavior
 
     /**
-     * @type {Boolean} 
      * Whether content streaming is enabled for the place
+     * 
+     * @type {Boolean} 
      */
     this.StreamingEnabled
 
     /**
-     * @type {Number} 
      * [notscriptable]
      * Minimum distance that content will be streamed to players with high priority
+     * 
+     * @type {Number} 
      */ 
     this.StreamingMinRadius
     
     /**
-     * @type {StreamingPauseMode} 
      * [notscriptable]
      * Whether streaming physics pause mode is active
+     * 
+     * @type {StreamingPauseMode} 
      */  
     this.StreamingPauseMode
     
 
     /**
-     * @type {Number} 
      * [notscriptable]
      * Maximum distance that content will be streamed to players
+     * 
+     * @type {Number} 
      */
     this.StreamingTargetRadius    
 
     /**
-     * @type {Terrain} 
      * [readonly] [notreplicated]
      * A reference to the Terrain object parented to the Workspace
+     * 
+     * @type {Terrain} 
      */   
     this.Terrain
     
     /**
-     * @type {Boolean} 
      * [notscriptable]
      * Determines whether parts in different groups set to not collide will ignore collisions and touch events
+     * 
+     * @type {Boolean} 
      */
     this.TouchesUseCollisionGroups
   }

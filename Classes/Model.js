@@ -1,6 +1,9 @@
+const RoTypes = require('../dont_doc/RoTypes')
+
 const PVInstance = require('./PVInstance.js');
-const CFrame = require('../Datatypes/CFrame.js');
 const BasePart = require('./BasePart');
+
+const CFrame = RoTypes.CFrame
 
 /**
  * @inheritdoc
@@ -17,15 +20,15 @@ class Model extends PVInstance {
 
 
     /**
-     * @type {CFrame}
      * [notreplicated]
      * Determines where the pivot of a Model which does not have a set Model.PrimaryPart is located.
+     * @type {CFrame}
      */
     this.WorldPivot;
 
     /**
-     * @type {BasePart}
      * Points to the primary part of the Model.
+     * @type {BasePart}
      */
     this.PrimaryPart;
 

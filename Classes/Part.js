@@ -1,4 +1,4 @@
-const RoEnums = require('../RoModules.js').Enum
+const RoEnums = require('../dont_doc/RoEnums')
 const PartType = RoEnums.PartType
  
 
@@ -17,9 +17,10 @@ class Part extends FormFactorPart {
     
     this.ClassName = "Part"
 
-    /** @type {PartType} 
+    /** 
      * [notreplicated]
      * Sets the type of shape the object has.
+     * @type {PartType} 
      */
     this.Shape;
   }

@@ -11,38 +11,37 @@ class GuiService extends Instance {
   constructor() {
     
     /**
-     * @type {Boolean}
      * If the select button on a gamepad will automatically set a GUI as the selected object when the Select button is pressed. Turning this off will mean that Gui navigation will still work if GuiNavigationEnabled is enabled but you will have to set SelectedObject manually to start Gui navigation.
+     * @type {Boolean}
      */
     this.AutoSelectGuiEnabled
     
 
     /**
-     * @type {Boolean} 
      * Toggles whether or not objects in the CoreGui can be navigated using a Gamepad.
+     * @type {Boolean} 
      */
     this.CoreGuiNavigationEnabled
     
     /**
-     * @type {Boolean} 
      * Used to enable and disable the default controller GUI navigation.
+     * @type {Boolean} 
      */
     this.GuiNavigationEnabled
     
     /**
-     * @type {Boolean} 
      * [readonly] [notreplicated]
      * Returns true if any menu of CoreGui is open
+     * @type {Boolean} 
      */
     this.MenuIsOpen
     
 
     /**
-     * @type {GuiObject} 
      * Sets the GuiObject currently being focused on by the GUI Navigator (used for Gamepads)
+     * @type {GuiObject} 
      */
     this.SelectedObject
-    
   }
 }
 

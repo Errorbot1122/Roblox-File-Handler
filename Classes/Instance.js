@@ -1,4 +1,4 @@
-const RoModules = require('../RoModules')
+const RoModules = require('../dont_doc/RoModules')
 
 /**
  * @class 
@@ -10,51 +10,57 @@ class Instance {
     // Roblox's Vars
 
     /**
+     * Determines if an Instance can be cloned using {@link Instance:Clone} or saved to file.
+     * 
      * @type {Boolean}
-     * Determines if an Instance can be cloned using Instance:Clone or saved to file.
      */
     this.Archivable = true
 
     /**
-     * @protected
-     * @readonly
-     * @type {String}
      * [readonly] [notreplicated]
      * A read-only string representing the class this Instance belongs to
+     * 
+     * @readonly
+     * @type {String}
      */
     this.ClassName = "Instance"
 
     /**
-     * @type {String}
      * A non-unique identifier of the Instance
+     * 
+     * @type {String}
      */
     this.Name = ""
 
     /**
-     * @type {Instance}
      * Determines the hierarchical parent of the Instance
+     * @type {Instance}
      */
     this.Parent = null
 
     /**
-     * @type {Boolean}
      * [hidden]
      * A deprecated property that used to protect CoreGui objects
+     * 
+     * @type {Boolean}
      */
     this.RobloxLocked = false
 
 
-    // My Vars
+    // Custom Vars
     
     /**
-     * @type {Array<Instance>}
      * An array of children
+     * 
+     * @type {Array<Instance>}
      */
     this.Children = []
 
     /**
-     * @type {Boolean}
+     * If the object si distroyed
      * 
+     * @protected
+     * @type {Boolean}
      */
     this._isDistroyed = false
 
