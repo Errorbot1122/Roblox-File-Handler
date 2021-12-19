@@ -1,25 +1,60 @@
-
 <h1>Documentation</h1>
 This is all the full on documentation for Roblox File Handler
 
 <h1>Table Of Contents</h1>
 
+* [Globle Functions](#functions)
+    {{#functions scope="global"}}
+    {{#expif access '!==' 'private'}}
+    * [**`{{name}}:({{#each params}} {{this.name}} {{/each}})`**](#{{id}}): {{#if returns}}{{#each returns}}{{#each this.type.names}} ***`{{this}}`*** {{/each}}{{/each}}{{else}} ***`Void`*** {{/if}} {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    {{/expif}}
+    {{/functions}}
 * [Classes](#classes)
     {{#classes}}
-    * [**`{{longname}}`**](#{{id}})
+    {{#expif access '!==' 'private'}}
+    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    {{/expif}}
     {{/classes}}
 * [Enums](#enums)
-    {{#identifiers kind="enums"}}
-    * [**`{{longname}}`**](#{{id}})
+    {{#identifiers kind='enum'}}
+    {{#expif access '!==' 'private'}}
+    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    {{/expif}}
     {{/identifiers}}
+    
+# API
 
-<h1>API</h1>
+## Globle Function <a id="functions" />
 
-<h2 id="classes"> Classes </h1>
+{{#functions scope="global"}}
+{{#expif access '!==' 'private'}}
+### **`{{name}}:({{#each params}} {{this.name}} {{/each}})`** <a id="{{id}}"></a>
+
+{{#if description}}
+
+{{description}}
+
+{{/if}}
+
+{{#if scope}}
+**scope**: *{{scope}}*
+{{/if}}
+
+{{#each params}} 
+* `{{this.name}}` {{#if this.type.names}}({{#each this.type.names}} *`{{this}}`* {{/each}}){{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}
+{{/each}}
+
+**Returns:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}{{else}} *`Void`* {{/if}}
+_________________
+
+{{/expif}}
+{{/functions}}
+
+## Classes <a id="classes" />
 
 {{#classes}}
-
-<h3 id="{{id}}"> {{name}} </h3>
+{{#expif access '!==' 'private'}}
+### {{name}} <a id="{{id}}" />
 
 {{#if description}}
 
@@ -29,57 +64,82 @@ This is all the full on documentation for Roblox File Handler
 
 <h4> Fields </h4>
 
-{{#identifiers kind="member" memberof=longname}}
-* **{{name}} ({{#each type.names}} `{{this}}`{{/each}} )** {{#if description}} — {{description}} {{/if}}
+{{#identifiers kind='member' memberof=longname}}
+{{#expif access '!==' 'private'}}
+* **{{name}} ({{#each type.names}} `{{this}}`{{/each}} )** {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+{{/expif}}
 {{/identifiers}}
- 
+
+{{! Check if the metheds exist}}
+{{#functions memberof=longname}}{{assign 'methodsExist' ../longname }}{{/functions}}
+
+{{! Run only if it dose}}
+{{#if @root.methodsExist}}
+{{#expif @root.methodsExist '==' longname}}
 <h4> Methods </h4>
 
 {{#functions memberof=longname}}
-**`{{name}}({{#each params}} {{this.name}} {{/each}})`:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}{{else}} *`Void`* {{/if}}
+{{#expif access '!==' 'private'}}
+**`{{name}}({{#each params}} {{this.name}} {{/each}})`:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`*{{/each}}{{/each}}{{else}} *`Void`*{{/if}} ({{#each customTags}}{{#expif tag '==' 'shortdecription'}}{{value}}{{/expif}}{{/each}})
 
 <small>
-{{! Convert the markdown to valid html}}
-
-{{#markdown}}
-
 {{#if description}}
 
+{{#markdown}}
 {{description}}
+{{/markdown}}
+
 {{/if}}
 
 {{#if scope}}
-
-**scope**: *{{scope}}*
+<p><b>scope:</b> <em>{{scope}}</em></p>
 {{/if}}
 
+<ul>
 {{#each params}} 
-* `{{this.name}}` ({{#each this.type.names}} *`{{this}}`* {{/each}}) {{#if description }} — {{this.description}} {{/if}}
+<li> {{this.name}} {{#if this.type.names}}({{#each this.type.names}} <em><code>{{this}}</code></em>{{/each}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}</li>
 {{/each}}
+</ul>
 
-**Returns** {{#if returns}}{{#each returns}}{{#each this.type.names}} {{this}}`* {{/each}}{{/each}}{{else}} *`Void`* {{/if}}
+<b>Returns:</b> {{#if returns}}{{#each returns}}{{#each this.type.names}} <em><code>{{this}}</code></em> {{/each}}{{/each}}{{else}} <em><code>Void</em></code> {{/if}}
 
-{{/markdown}}
 </small>
 
+_________________
+
+{{/expif}}
 {{/functions}}
- 
+{{/expif}}
+{{/if}}
+
+_________________
+
+{{/expif}}
 {{/classes}}
 
-<h2 id='enums'>Enums</h2>
+_________________
 
-{{#identifiers kind="enum"}}
+### Enums <a id="enums" />
 
-<h3 id={{id}}><stong><code>{{longname}}</code></stong></h3>
+{{#identifiers kind='enum'}}
+{{#expif access '!==' 'private'}}
+### **`{{name}}`** <a id="{{id}}"></a>
 
 {{description}}
 
 <h4>Properties</h4>
 
 | Name | Type | Value | Description |
-| :---: | :---: | :---: | :---: |
+| :---: | :---: | :---: | :--- |
 {{#each properties}}
-| {{name}} | {{#each names}} *`{{this}}`* {{/each}} | {{defaultvalue}} | {{description}} |
+{{#expif access '!==' 'private'}}
+| {{name}} | {{#each names}} *`{{this}}`* {{/each}} | {{defaultvalue}} | {{#if customTags}} {{#each customTags}} {{#expif tag '==' 'shortdecription'}} {{value}} {{/expif}} {{/each}} {{else}} {{description}} {{/if}} |
+{{/expif}}
 {{/each}}
+{{/expif}}
+
+_________________
 
 {{/identifiers}}
+
+<small><b>Last Updated:</b> {{now}}.</small>

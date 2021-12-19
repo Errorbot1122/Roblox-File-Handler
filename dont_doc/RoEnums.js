@@ -2,26 +2,27 @@
 const fs = require("fs");
 
 const directory_name = "Enums";
+const subPath = "../Enums";
 
 let exportRequired = {}
 
 // Function to get current filepaths
 // in directory
-let filepaths = fs.readdirSync(directory_name);
+let filePaths = fs.readdirSync(directory_name);
   
 
-filepaths.forEach((filepath) => {
+filePaths.forEach((filePath) => {
 
-  let fileExtentionIndex = filepath.indexOf(".")
+  let fileExtentionIndex = filePath.indexOf(".")
 
   if (fileExtentionIndex != -1) {
 
-    let extention = filepath.slice(fileExtentionIndex)
-    let fileName = filepath.slice(0, fileExtentionIndex)
+    let extention = filePath.slice(fileExtentionIndex)
+    let fileName = filePath.slice(0, fileExtentionIndex)
 
-    if (extention == ".js" && fileName != "RoEnums") {
+    if (extention == ".js") {
       
-      exportRequired[fileName] = require(`./${filepath}`)
+      exportRequired[fileName] = require(`${subPath}/${filePath}`)
     }
   }
   

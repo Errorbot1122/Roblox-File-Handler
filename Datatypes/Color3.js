@@ -1,12 +1,13 @@
 const BaseVector = require('./BaseVector.js')
-const Globel = require('../Globles.js')
+const Globals = require('../Globals.js')
 
-const reMap = Globel.math.reMap
+const reMap = Globals.math.reMap
 
 /**
  * @inheritdoc
  * @class
  * 
+ * @shortdecription Colors from 0 - 1
  * @classdesc Color3 is a data type that describes a color using R, G and B components, which are on the range [0, 1] 
  */
 class Color3 extends BaseVector {

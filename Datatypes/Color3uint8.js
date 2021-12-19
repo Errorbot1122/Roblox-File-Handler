@@ -1,4 +1,4 @@
-const Globles = require('../Globles.js')
+const Globals = require('../Globals.js')
 const Color3 = require('./Color3.js')
 const BaseVector = require('./BaseVector.js')
 
@@ -6,6 +6,7 @@ const BaseVector = require('./BaseVector.js')
  * @inheritdoc
  * @class
  * 
+ * @shortdecription Colors from 0, 255
  * @classdesc Color3 but in the well know [0, 255] range
  */
 class Color3uint8 extends BaseVector {
@@ -21,7 +22,7 @@ class Color3uint8 extends BaseVector {
       }
       else {
         
-        let argbBuffer = Globles.math.toBytesInt32(x);
+        let argbBuffer = Globals.math.toBytesInt32(x);
 
         let argbDataView = new DataView(argbBuffer)
 

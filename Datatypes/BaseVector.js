@@ -1,7 +1,9 @@
-const Globel = require('../Globles.js')
+const Globals = require('../Globals.js')
 
 /**
  * @class
+ * 
+ * @shortdecription Base class for vecters
  * @classdesc The base class for all Vecter Objects in this packege
  */
 class BaseVector {
@@ -32,7 +34,7 @@ class BaseVector {
       let value1 = (this.values[i]) ? this.values[i] : 0;
       let value2 = (values2[i]) ? values2[i] : 0;
 
-      newValue[i] = Globel.math.lerp(value1, value2, amt);
+      newValue[i] = Globals.math.lerp(value1, value2, amt);
 
     }
 

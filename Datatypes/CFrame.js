@@ -2,6 +2,8 @@ const Vector3 = require('./Vector3.js');
 
 /**
  * @class
+ * 
+ * @shortdecription Roblox's CFrame
  * @classdesc CFrame, short for coordinate frame, is a data type that describes a 3D position and orientation
  */
 class CFrame {

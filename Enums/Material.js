@@ -1,5 +1,6 @@
 /**
- * @enum {Number} All the roblox materials
+ * @enum {Number} All of Roblox's materials
+ * @shortdescription Materials
  */
 const Material = {
   /** Applies to BasPart only. */

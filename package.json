@@ -4,11 +4,11 @@
   "description": "Parse Roblox files like .rbxlx and .rbxmx files",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "buildDoc": "npx jsdoc2md !(node_modules|dont_doc)/*.js -t docs.hbs --helper dont_doc/customBlockHelpers.hbs.js"
+    "test": "node test.js",
+    "buildDoc": "npx jsdoc2md *.js !(node_modules|dont_doc)/*.js -t docs.hbs --helper dont_doc/customBlockHelpers.hbs.js > docs.md"
   },
   "keywords": [],
-  "author": "",
+  "author": "Errorbot1122",
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "handlebars": "^4.7.7",
-    "helper-markdown": "^1.0.0",
+    "handlebars-helpers": "^0.10.0",
     "jsdoc-to-markdown": "^7.1.0"
   }
 }

@@ -6,6 +6,8 @@ const BasePart = require('./BasePart.js');
  * 
  * @deprecated Deprecated by roblox
  * 
+ * 
+ * @shortdesc Deprecaded by roblox
  * @classdesc The FormFactorPart class is an abstract class
  * Inharates {@link BasePart}
  */

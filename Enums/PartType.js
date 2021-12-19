@@ -1,4 +1,5 @@
 /**
+ * @shortdescription Shape of a part
  * @enum {Number} The PartType Enum controls the {@link Part.Shape} of an object. 
  * 
  * Block, sphere, and cylinder parts:

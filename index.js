@@ -1,10 +1,9 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
-const util = require('util')
-const colors = require('colors/safe');
+//const util = require('util')
 
-const RoModules = require('./RoModules.js');
-const Globles = require('./Globles.js');
+const RoModules = require('./dont_doc/RoModules.js');
+//const Globles = require('./Globles.js');
 
 const RoClasses = RoModules.Classes;
 const RoTypes = RoModules.Datatypes;
@@ -13,31 +12,29 @@ const Instance = RoClasses.Instance;
 
 const xmlParser = new xml2js.Parser();
 
+/**
+ * @description The name of the packege
+ * @private
+ */
 const packageName = 'Roblox File Parser';
 
+/**
+ * @shortdecription instance look-up table
+ * @description The look-up table for all instances that exist (by Refrance id)
+ * 
+ * @kind {Object}
+ */
 let REFIDTOINSTANCE = {}
 
 let debug = false;
 let showStack = true;
 let showExtraData = true;
 
-colors.setTheme({
-  silly: 'rainbow',
-  input: 'grey',
-  verbose: 'cyan',
-  prompt: 'grey',
-  info: 'green',
-  data: 'gray',
-  help: 'cyan',
-  warn: 'yellow',
-  debug: 'blue',
-  error: 'red'
-
-});  
-
 /**
- * Check if the xml_Tag is the parse-able/parsed XML Tag
+ * @shortdecription Valid XML tag checker
+ * @description Check if the xml_Tag is the parse-able/parsed XML Tag
  * 
+ * @kind {Function}
  * @param {*} xml_Tag - The object to check
  * @returns {Boolean}
 */
@@ -60,64 +57,10 @@ function isXMLTag(xml_Tag) {
     });
 	};
 }
-/*
-function parseFileCallback(x, callback, option) {
-  
-  const optionsDefaults = {
-    
-    REFIDTOINSTANCE: {},
-    type: 'auto'
-  }
-
-  options = {
-    ...optionsDefaults,
-    ...options
-  }
-
-  type = options.fileType.toLowerCase()
-
-  switch(type) {
-
-    case 'auto':
-
-      if (Globles.isValidPath(x)) {
-        
-        parse(x, callback, 'file');
-      }
-      else if(isXMLTag(x)) {
-
-        parse(x, callback, 'xml');
-      } 
-      else {
-
-        callback([new TypeError("Invalid Prameter 'x' for parse.")])
-      }
-      break;
-    
-    case 'file':
-      if (Globles.isValidPath(x)) {
-
-        _parseFile(x, callback);
-      }
-      break;
-
-    case 'xml':
-
-      if (isXMLTag(x)) {
-        
-        xmlToObject(x, (errs, newObj) => {
-
-          return objectToInsts(newObj);
-        });
-      }
-      break;
-    
-  }
-}
-*/
 
 /**
- * check if the item is the Item type
+ * @shortdecription Valid item checker
+ * @description check if the item is the Item type
  * 
  * @param {*} item - The object to check
  * @returns {Boolean}
@@ -126,7 +69,8 @@ const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed
 
 
 /**
- * converts a referent id, item, or 
+ * @shortdecription The all around 'to instance' converter
+ * @description converts a Referent Id, Item into a valid Instance
  * 
  * @param {String|Item|Instance} instance - the instance you want to convert
  * @returns {Instance}
@@ -153,11 +97,13 @@ function convertValidInstance(instance) {
 }
 
 /**
+ * @shortdecription Roblox's FindFirstChildOfClass, but with items
+ * @description Finds the first instance in 'itemList' with the same class as 'className'
+ * 
  * @param {Array<Item>} itemList - A list of Item objects
  * @param {String} className - The name of the className
  * @param {String|Item|Instance} parent - The item's parent
  * @returns {null | Item}
- * @description Finds the first instance in 'itemList' with the same class as 'className'
  */
 function findFirstItemByClassName(itemList, className, parent) {
   className = className.toLocaleLowerCase();
@@ -180,8 +126,18 @@ function findFirstItemByClassName(itemList, className, parent) {
   return null
 }
 
-
-function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE) {
+/**
+ * @shortdecription Property => Type
+ * 
+ * Converts an property into an valid type
+ * @private
+ * 
+ * @param {*} property 
+ * @param {String | Number} propertyTypeKey - The key to select the proptry
+ * @param {Object} localREFIDTOINSTANCE - The 'REFIDTOINSTANCE' it will use to find instances
+ * @returns {*}
+ */
+function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE = REFIDTOINSTANCE) {
   propertyValue = property._;
   propertyName = property.$.name;
   
@@ -258,7 +214,11 @@ function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE)
 
   return
 }
+
 /**
+ * @shortdecription Item => Instance
+ * @description Convert an parsed XML Item into a valid roblox Instance if posible
+ * 
  * @param {Item} item - The Item you want convert
  * @param {String|Item|Instance} parent - The item's parent
  * @param {Object} options - extra options
@@ -347,6 +307,13 @@ function convertItemToInstance(item, parent, options) {
   return returnInst;
 }
 
+/**
+ * @shortdecription File => Object
+ * @description Convert a file into an object
+ * 
+ * @param {String} path - The file path to convert
+ * @param {Function} callback - The callback function
+ */
 function fileToObject(path, callback) {
 
   // Read the file
@@ -360,6 +327,13 @@ function fileToObject(path, callback) {
   })
 }
 
+/**
+ * @shortdecription XML => Object
+ * @description Convert a parsed XML file into an object
+ * 
+ * @param {String} xml - The XML data to convert
+ * @param {Function} callback - The callback function
+ */
 function xmlToObject(xml, callback) {
 
   // only parse the xlm
@@ -369,7 +343,13 @@ function xmlToObject(xml, callback) {
   })
 }
 
-function objectToInsts(objs) {
+/**
+ * @shortdecription Object(s) => Istance(s)
+ * @description Convert one or multiple instances into one or meny objects
+ * 
+ * @param {*} objs - A valed Item into an instance
+ */
+function objToInst(objs) {
   
   if (Array.isArray(objs)) {
     
@@ -392,6 +372,13 @@ function objectToInsts(objs) {
   } 
 }
 
+/**
+ * @shortdecription The main file parser
+ * @description Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
+ * 
+ * @param {String} path - The path to the file you want to parse
+ * @param {*} callback - The callback function
+ */
 function parseFile(path, callback) {
 
   fileToObject(path, (errs, result) => {
@@ -429,6 +416,6 @@ module.exports = {
   findFirstItemByClassName,
   fileToObject,
   xmlToObject,
-  objectToInsts,
-  parseFile,
+  objToInst,
+  parseFile
 }

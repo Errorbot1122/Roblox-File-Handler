@@ -14,6 +14,8 @@ const InputType = {
   Constant: 12,
 
   /**
+   * @shortdescription Rotate the part via a sine wave
+   * 
    * Rotate at a velocity of:
    * 
    * ```lua
