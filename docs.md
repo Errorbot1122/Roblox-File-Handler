@@ -7,6 +7,7 @@ This is all the full on documentation for Roblox File Handler
     * [**`reMap:( n  start  stop  newStart  newStop  withinBounds )`**](#reMap):  ***`Number`***  
     * [**`lerp:( start  end  amt )`**](#lerp):  ***`Number`***  
     * [**`toBytesInt32:( num )`**](#toBytesInt32):  ***`Void`***  
+    * [**`isXMLTag:( xml_Tag )`**](#isXMLTag):  ***`Boolean`***  *— Valid XML tag checker*
     * [**`isItem:( item )`**](#isItem):  ***`Boolean`***  *— Valid item checker*
     * [**`convertValidInstance:( instance )`**](#convertValidInstance):  ***`Instance`***  *— The all around &#x27;to instance&#x27; converter*
     * [**`findFirstItemByClassName:( itemList  className  parent )`**](#findFirstItemByClassName):  ***`null`***  ***`Item`***  *— Roblox&#x27;s FindFirstChildOfClass, but with items*
@@ -32,9 +33,9 @@ This is all the full on documentation for Roblox File Handler
     * [**`Vector3`**](#Vector3) 
 * [Enums](#enums)
     * [**`InputType`**](#InputType) 
-    * [**`Material`**](#Material) 
-    * [**`PartType`**](#PartType) 
-    * [**`SurfaceType`**](#SurfaceType) 
+    * [**`Material`**](#Material) *— Materials*
+    * [**`PartType`**](#PartType) *— Shape of a part*
+    * [**`SurfaceType`**](#SurfaceType) *— The specific type for a specific surface*
     
 # API
 
@@ -50,12 +51,12 @@ Credit to [RoyallyFlushed]{@link https://www.roblox.com/users/profile?username&#
 
 **scope**: *global*
 
-* `n` ( *`Number`* )
-* `start` ( *`Number`* )
-* `stop` ( *`Number`* )
-* `newStart` ( *`Number`* )
-* `newStop` ( *`Number`* )
-* `withinBounds` ( *`Boolean`* )
+* `n` ( *`Number`* ) *— The number you want to map* 
+* `start` ( *`Number`* ) *— The starting number of the original range* 
+* `stop` ( *`Number`* ) *— The ending number of the original range* 
+* `newStart` ( *`Number`* ) *— The starting number of the new range* 
+* `newStop` ( *`Number`* ) *— The ending number of the new range* 
+* `withinBounds` ( *`Boolean`* ) *— Is forced to be inbetween the new range or not. [Defult: false]* ***(Optional)***
 
 **Returns:**  *`Number`* 
 _________________
@@ -68,9 +69,9 @@ returns the interpolated version inputed range by an amount between 0 and 1. (ca
 
 **scope**: *global*
 
-* `start` ( *`Number`* )
-* `end` ( *`Number`* )
-* `amt` ( *`Number`* )
+* `start` ( *`Number`* ) *— The starting number in the range.* 
+* `end` ( *`Number`* ) *— The ending number in the range.* 
+* `amt` ( *`Number`* ) *— the amount you want to interpolate between 0 and 1. (can go above or below 0 - 1, but not recommended)* 
 
 **Returns:**  *`Number`* 
 _________________
@@ -80,9 +81,22 @@ _________________
 
 **scope**: *global*
 
-* `num` ( *`Number`* )
+* `num` ( *`Number`* ) *— the number you want to convert* 
 
 **Returns:**  *`Void`* 
+_________________
+
+### **`isXMLTag:( xml_Tag )`** <a id="isXMLTag"></a>
+
+
+Check if the xml_Tag is the parse-able/parsed XML Tag
+
+
+**scope**: *global*
+
+* `xml_Tag` ( *`*`* ) *— The object to check* 
+
+**Returns:**  *`Boolean`* 
 _________________
 
 ### **`isItem:( item )`** <a id="isItem"></a>
@@ -93,7 +107,7 @@ check if the item is the Item type
 
 **scope**: *global*
 
-* `item` ( *`*`* )
+* `item` ( *`*`* ) *— The object to check* 
 
 **Returns:**  *`Boolean`* 
 _________________
@@ -106,7 +120,7 @@ converts a Referent Id, Item into a valid Instance
 
 **scope**: *global*
 
-* `instance` ( *`String`*  *`Item`*  *`Instance`* )
+* `instance` ( *`String`*  *`Item`*  *`Instance`* ) *— the instance you want to convert* 
 
 **Returns:**  *`Instance`* 
 _________________
@@ -119,9 +133,9 @@ Finds the first instance in &#x27;itemList&#x27; with the same class as &#x27;cl
 
 **scope**: *global*
 
-* `itemList` ( *`Array.&lt;Item&gt;`* )
-* `className` ( *`String`* )
-* `parent` ( *`String`*  *`Item`*  *`Instance`* )
+* `itemList` ( *`Array.&lt;Item&gt;`* ) *— A list of Item objects* 
+* `className` ( *`String`* ) *— The name of the className* 
+* `parent` ( *`String`*  *`Item`*  *`Instance`* ) *— The item&#x27;s parent* 
 
 **Returns:**  *`null`*  *`Item`* 
 _________________
@@ -134,9 +148,9 @@ Convert an parsed XML Item into a valid roblox Instance if posible
 
 **scope**: *global*
 
-* `item` ( *`Item`* )
-* `parent` ( *`String`*  *`Item`*  *`Instance`* )
-* `options` ( *`Object`* )
+* `item` ( *`Item`* ) *— The Item you want convert* 
+* `parent` ( *`String`*  *`Item`*  *`Instance`* ) *— The item&#x27;s parent* 
+* `options` ( *`Object`* ) *— extra options* 
 
 **Returns:**  *`Instance`*  *`Item`* 
 _________________
@@ -149,8 +163,8 @@ Convert a file into an object
 
 **scope**: *global*
 
-* `path` ( *`String`* )
-* `callback` ( *`function`* )
+* `path` ( *`String`* ) *— The file path to convert* 
+* `callback` ( *`function`* ) *— The callback function* 
 
 **Returns:**  *`Void`* 
 _________________
@@ -163,8 +177,8 @@ Convert a parsed XML file into an object
 
 **scope**: *global*
 
-* `xml` ( *`String`* )
-* `callback` ( *`function`* )
+* `xml` ( *`String`* ) *— The XML data to convert* 
+* `callback` ( *`function`* ) *— The callback function* 
 
 **Returns:**  *`Void`* 
 _________________
@@ -172,12 +186,9 @@ _________________
 ### **`objToInst:( objs )`** <a id="objToInst"></a>
 
 
-Convert one or multiple instances into one or meny objects
-
-
 **scope**: *global*
 
-* `objs` ( *`*`* )
+* `objs` ( *`*`* ) *— A valed Item into an instance* 
 
 **Returns:**  *`Void`* 
 _________________
@@ -190,8 +201,8 @@ Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like 
 
 **scope**: *global*
 
-* `path` ( *`String`* )
-* `callback` ( *`*`* )
+* `path` ( *`String`* ) *— The path to the file you want to parse* 
+* `callback` ( *`*`* ) *— The callback function* 
 
 **Returns:**  *`Void`* 
 _________________
@@ -320,6 +331,7 @@ Instance is the base class for all classes in the Roblox class hierarchy. Every 
 
 <p><b>scope:</b> <em>instance</em></p>
 
+
 <ul>
 </ul>
 
@@ -337,6 +349,7 @@ _________________
 
 
 <p><b>scope:</b> <em>instance</em></p>
+
 
 <ul>
 </ul>
@@ -356,6 +369,7 @@ _________________
 
 <p><b>scope:</b> <em>instance</em></p>
 
+
 <ul>
 </ul>
 
@@ -373,6 +387,7 @@ _________________
 
 
 <p><b>scope:</b> <em>instance</em></p>
+
 
 <ul>
 </ul>
@@ -392,8 +407,10 @@ _________________
 
 <p><b>scope:</b> <em>instance</em></p>
 
+<code>descendant</code> ( <b><code>Instance</code></b> )  <b>— the Instance you want to check</b> 
+
 <ul>
-<li> descendant ( <em><code>Instance</code></em>) </li>
+<li> <code>descendant</code> ( <b><code>Instance</code></b> )  <b>— the Instance you want to check</b> </li>
 </ul>
 
 <b>Returns:</b>  <em><code>Boolean</code></em> 
@@ -522,9 +539,12 @@ The base class for all Vecter Objects in this packege
 
 <p><b>scope:</b> <em>instance</em></p>
 
+<code>values2</code> ( <b><code>Number</code></b> )  
+<code>amt</code> ( <b><code>Number</code></b> )  
+
 <ul>
-<li> values2 ( <em><code>Number</code></em>) </li>
-<li> amt ( <em><code>Number</code></em>) </li>
+<li> <code>values2</code> ( <b><code>Number</code></b> )  </li>
+<li> <code>amt</code> ( <b><code>Number</code></b> )  </li>
 </ul>
 
 <b>Returns:</b>  <em><code>BaseVector</code></em> 
@@ -705,4 +725,4 @@ Used to determine how a surface should be displayed on a part and how automatic 
 _________________
 
 
-<small><b>Last Updated:</b> Sun Dec 19 2021 16:48:11 GMT+0000 (Coordinated Universal Time).</small>
+<small><b>Last Updated:</b> Sun Dec 19 2021 17:37:25 GMT+0000 (Coordinated Universal Time).</small>

@@ -14,7 +14,6 @@ const xmlParser = new xml2js.Parser();
 
 /**
  * @description The name of the packege
- * @shortdescrip
  * @private
  */
 const packageName = 'Roblox File Parser';
@@ -23,7 +22,8 @@ const packageName = 'Roblox File Parser';
  * @shortdescription instance look-up table
  * @description The look-up table for all instances that exist (by Refrance id)
  * 
- * @kind {Object}
+ * @type {Object}
+ * @private
  */
 let REFIDTOINSTANCE = {}
 
@@ -35,7 +35,6 @@ let showExtraData = true;
  * @shortdescription Valid XML tag checker
  * @description Check if the xml_Tag is the parse-able/parsed XML Tag
  * 
- * @kind {Function}
  * @param {*} xml_Tag - The object to check
  * @returns {Boolean}
 */
@@ -62,6 +61,8 @@ function isXMLTag(xml_Tag) {
 /**
  * @shortdescription Valid item checker
  * @description check if the item is the Item type
+ * 
+ * @type {Function}
  * 
  * @param {*} item - The object to check
  * @returns {Boolean}
@@ -320,6 +321,10 @@ function fileToObject(path, callback) {
   // Read the file
   fs.readFile(path, (rErr, data) => {
     
+    if (rErr) {
+      callback([rErr, null], null, path);
+    }
+
     // Parse the xml file
     xmlParser.parseString(data, (xErr, jsObject) => {
       
@@ -346,7 +351,6 @@ function xmlToObject(xml, callback) {
 
 /**
  * @shortdescription Object(s) => Istance(s)
- * @description Convert one or multiple instances into one or meny objects
  * 
  * @param {*} objs - A valed Item into an instance
  */
@@ -374,8 +378,14 @@ function objToInst(objs) {
 }
 
 /**
+ * Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
+ * 
+ * The callback func's params are:
+ * 
+ * errs: An Array of Errors (0 = Read File Error, 1 = Parse Error)
+ * newInstences: The new array of instances
+ * 
  * @shortdescription The main file parser
- * @description Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
  * 
  * @param {String} path - The path to the file you want to parse
  * @param {*} callback - The callback function

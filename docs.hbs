@@ -41,7 +41,7 @@ This is all the full on documentation for Roblox File Handler
 {{/if}}
 
 {{#each params}} 
-* `{{this.name}}` {{#if this.type.names}}({{#each this.type.names}} *`{{this}}`* {{/each}}){{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}
+* `{{this.name}}` {{#if this.type.names}}({{#each this.type.names}} *`{{this}}`* {{/each}}{{/if}}) {{#if description}}*— {{description}}*{{/if}} {{#if optional}}***(Optional)***{{/if}}
 {{/each}}
 
 **Returns:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}{{else}} *`Void`* {{/if}}
@@ -95,9 +95,13 @@ _________________
 <p><b>scope:</b> <em>{{scope}}</em></p>
 {{/if}}
 
+{{#each params}} 
+<code>{{this.name}}</code> {{#if this.type.names}}({{#each this.type.names}} <b><code>{{this}}</code></b> {{/each}}{{/if}}) {{#if description}} <b>— {{description}}</b>{{/if}} {{#if optional}} <b><em>(Optional)</em></b> {{/if}}
+{{/each}}
+
 <ul>
 {{#each params}} 
-<li> {{this.name}} {{#if this.type.names}}({{#each this.type.names}} <em><code>{{this}}</code></em>{{/each}}) {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}</li>
+<li> <code>{{this.name}}</code> {{#if this.type.names}}({{#each this.type.names}} <b><code>{{this}}</code></b> {{/each}}{{/if}}) {{#if description}} <b>— {{description}}</b>{{/if}} {{#if optional}} <b><em>(Optional)</em></b> {{/if}}</li>
 {{/each}}
 </ul>
 
