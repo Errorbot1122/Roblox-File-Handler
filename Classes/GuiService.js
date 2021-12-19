@@ -4,11 +4,11 @@ const Instance = require('./Instance')
  * @class
  * @inheritdoc
  * 
- * @shortdecription Roblox's GuiSevice
+ * @shortdescription Roblox's GuiSevice
  * @classdesc The GuiService is a service which currently allows developers to control what GuiObject is currently being selected by the gamepad navigator.
  * Inharates {@link Instance}
  * 
- * @todo Finish shortdecriptions
+ * @todo Finish shortdescriptions
  */
 class GuiService extends Instance {
   constructor() {

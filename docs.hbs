@@ -6,19 +6,19 @@ This is all the full on documentation for Roblox File Handler
 * [Globle Functions](#functions)
     {{#functions scope="global"}}
     {{#expif access '!==' 'private'}}
-    * [**`{{name}}:({{#each params}} {{this.name}} {{/each}})`**](#{{id}}): {{#if returns}}{{#each returns}}{{#each this.type.names}} ***`{{this}}`*** {{/each}}{{/each}}{{else}} ***`Void`*** {{/if}} {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    * [**`{{name}}:({{#each params}} {{this.name}} {{/each}})`**](#{{id}}): {{#if returns}}{{#each returns}}{{#each this.type.names}} ***`{{this}}`*** {{/each}}{{/each}}{{else}} ***`Void`*** {{/if}} {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}
     {{/expif}}
     {{/functions}}
 * [Classes](#classes)
     {{#classes}}
     {{#expif access '!==' 'private'}}
-    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}
     {{/expif}}
     {{/classes}}
 * [Enums](#enums)
     {{#identifiers kind='enum'}}
     {{#expif access '!==' 'private'}}
-    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+    * [**`{{name}}`**](#{{id}}) {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}
     {{/expif}}
     {{/identifiers}}
     
@@ -41,7 +41,7 @@ This is all the full on documentation for Roblox File Handler
 {{/if}}
 
 {{#each params}} 
-* `{{this.name}}` {{#if this.type.names}}({{#each this.type.names}} *`{{this}}`* {{/each}}){{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}
+* `{{this.name}}` {{#if this.type.names}}({{#each this.type.names}} *`{{this}}`* {{/each}}){{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}
 {{/each}}
 
 **Returns:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`* {{/each}}{{/each}}{{else}} *`Void`* {{/if}}
@@ -66,7 +66,7 @@ _________________
 
 {{#identifiers kind='member' memberof=longname}}
 {{#expif access '!==' 'private'}}
-* **{{name}} ({{#each type.names}} `{{this}}`{{/each}} )** {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}
+* **{{name}} ({{#each type.names}} `{{this}}`{{/each}} )** {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}
 {{/expif}}
 {{/identifiers}}
 
@@ -80,7 +80,7 @@ _________________
 
 {{#functions memberof=longname}}
 {{#expif access '!==' 'private'}}
-**`{{name}}({{#each params}} {{this.name}} {{/each}})`:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`*{{/each}}{{/each}}{{else}} *`Void`*{{/if}} ({{#each customTags}}{{#expif tag '==' 'shortdecription'}}{{value}}{{/expif}}{{/each}})
+**`{{name}}({{#each params}} {{this.name}} {{/each}})`:** {{#if returns}}{{#each returns}}{{#each this.type.names}} *`{{this}}`*{{/each}}{{/each}}{{else}} *`Void`*{{/if}} ({{#each customTags}}{{#expif tag '==' 'shortdescription'}}{{value}}{{/expif}}{{/each}})
 
 <small>
 {{#if description}}
@@ -97,7 +97,7 @@ _________________
 
 <ul>
 {{#each params}} 
-<li> {{this.name}} {{#if this.type.names}}({{#each this.type.names}} <em><code>{{this}}</code></em>{{/each}}) {{#each customTags}}{{#expif tag '==' 'shortdecription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}</li>
+<li> {{this.name}} {{#if this.type.names}}({{#each this.type.names}} <em><code>{{this}}</code></em>{{/each}}) {{#each customTags}}{{#expif tag '==' 'shortdescription'}}*— {{value}}*{{/expif}}{{/each}}{{/if}}</li>
 {{/each}}
 </ul>
 
@@ -133,7 +133,7 @@ _________________
 | :---: | :---: | :---: | :--- |
 {{#each properties}}
 {{#expif access '!==' 'private'}}
-| {{name}} | {{#each names}} *`{{this}}`* {{/each}} | {{defaultvalue}} | {{#if customTags}} {{#each customTags}} {{#expif tag '==' 'shortdecription'}} {{value}} {{/expif}} {{/each}} {{else}} {{description}} {{/if}} |
+| {{name}} | {{#each names}} *`{{this}}`* {{/each}} | {{defaultvalue}} | {{#if customTags}} {{#each customTags}} {{#expif tag '==' 'shortdescription'}} {{value}} {{/expif}} {{/each}} {{else}} {{description}} {{/if}} |
 {{/expif}}
 {{/each}}
 {{/expif}}

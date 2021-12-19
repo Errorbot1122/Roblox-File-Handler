@@ -14,12 +14,13 @@ const xmlParser = new xml2js.Parser();
 
 /**
  * @description The name of the packege
+ * @shortdescrip
  * @private
  */
 const packageName = 'Roblox File Parser';
 
 /**
- * @shortdecription instance look-up table
+ * @shortdescription instance look-up table
  * @description The look-up table for all instances that exist (by Refrance id)
  * 
  * @kind {Object}
@@ -31,7 +32,7 @@ let showStack = true;
 let showExtraData = true;
 
 /**
- * @shortdecription Valid XML tag checker
+ * @shortdescription Valid XML tag checker
  * @description Check if the xml_Tag is the parse-able/parsed XML Tag
  * 
  * @kind {Function}
@@ -59,7 +60,7 @@ function isXMLTag(xml_Tag) {
 }
 
 /**
- * @shortdecription Valid item checker
+ * @shortdescription Valid item checker
  * @description check if the item is the Item type
  * 
  * @param {*} item - The object to check
@@ -69,7 +70,7 @@ const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed
 
 
 /**
- * @shortdecription The all around 'to instance' converter
+ * @shortdescription The all around 'to instance' converter
  * @description converts a Referent Id, Item into a valid Instance
  * 
  * @param {String|Item|Instance} instance - the instance you want to convert
@@ -97,7 +98,7 @@ function convertValidInstance(instance) {
 }
 
 /**
- * @shortdecription Roblox's FindFirstChildOfClass, but with items
+ * @shortdescription Roblox's FindFirstChildOfClass, but with items
  * @description Finds the first instance in 'itemList' with the same class as 'className'
  * 
  * @param {Array<Item>} itemList - A list of Item objects
@@ -127,7 +128,7 @@ function findFirstItemByClassName(itemList, className, parent) {
 }
 
 /**
- * @shortdecription Property => Type
+ * @shortdescription Property => Type
  * 
  * Converts an property into an valid type
  * @private
@@ -216,7 +217,7 @@ function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE 
 }
 
 /**
- * @shortdecription Item => Instance
+ * @shortdescription Item => Instance
  * @description Convert an parsed XML Item into a valid roblox Instance if posible
  * 
  * @param {Item} item - The Item you want convert
@@ -308,7 +309,7 @@ function convertItemToInstance(item, parent, options) {
 }
 
 /**
- * @shortdecription File => Object
+ * @shortdescription File => Object
  * @description Convert a file into an object
  * 
  * @param {String} path - The file path to convert
@@ -328,7 +329,7 @@ function fileToObject(path, callback) {
 }
 
 /**
- * @shortdecription XML => Object
+ * @shortdescription XML => Object
  * @description Convert a parsed XML file into an object
  * 
  * @param {String} xml - The XML data to convert
@@ -344,7 +345,7 @@ function xmlToObject(xml, callback) {
 }
 
 /**
- * @shortdecription Object(s) => Istance(s)
+ * @shortdescription Object(s) => Istance(s)
  * @description Convert one or multiple instances into one or meny objects
  * 
  * @param {*} objs - A valed Item into an instance
@@ -373,7 +374,7 @@ function objToInst(objs) {
 }
 
 /**
- * @shortdecription The main file parser
+ * @shortdescription The main file parser
  * @description Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
  * 
  * @param {String} path - The path to the file you want to parse

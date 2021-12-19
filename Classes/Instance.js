@@ -3,7 +3,7 @@ const RoModules = require('../dont_doc/RoModules')
 /**
  * @class 
  * 
- * @shortdecription The main Baseclass
+ * @shortdescription The main Baseclass
  * @classdesc Instance is the base class for all classes in the Roblox class hierarchy. Every other class that the Roblox engine defines inherits all of the members of Instance. 
  */
 class Instance {
@@ -13,7 +13,7 @@ class Instance {
 
     /**
      * Determines if an Instance can be cloned using {@link Instance:Clone} or saved to file.
-     * @shortdecription Can be cloned / saved
+     * @shortdescription Can be cloned / saved
      * 
      * @type {Boolean}
      */
@@ -22,7 +22,7 @@ class Instance {
     /**
      * [readonly] [notreplicated]
      * A read-only string representing the class this Instance belongs to
-     * @shortdecription The name of the class
+     * @shortdescription The name of the class
      * 
      * @readonly
      * @type {String}
@@ -45,7 +45,7 @@ class Instance {
     /**
      * [hidden]
      * A deprecated property that used to protect CoreGui objects
-     * @shortdecription (Deprecated!) Protects CoreGuis
+     * @shortdescription (Deprecated!) Protects CoreGuis
      * 
      * @deprecated
      * @type {Boolean}
@@ -64,7 +64,7 @@ class Instance {
 
     /**
      * If the instance is currently distroyed
-     * @shortdecription If the instance is distroyed
+     * @shortdescription If the instance is distroyed
      * 
      * @protected
      * @type {Boolean}
@@ -73,7 +73,7 @@ class Instance {
 
     /**
      * The ID Roblox uses to refrence objects
-     * @shortdecription Refrence Id
+     * @shortdescription Refrence Id
      * 
      * @type {String}
      */
@@ -88,7 +88,7 @@ class Instance {
 
   /** 
    * This function destroys all of an Instance’s children.
-   * @shortdecription destroy all the children
+   * @shortdescription destroy all the children
    */
   ClearAllChildren() {
     if (Children[0] != null && !this._isDistroyed) {
@@ -103,7 +103,7 @@ class Instance {
 
   /**
    * Create a copy of an object and all its descendants, ignoring objects that are not Archivable
-   * @shortdecription Copy the current object
+   * @shortdescription Copy the current object
    * 
    * @returns {Instance}
    */
@@ -129,7 +129,7 @@ class Instance {
 
   /**
    * Sets the Instance.Parent property to nil, locks the Instance.Parent property, disconnects all connections and calls Destroy on all children.
-   * @shortdecription Delets the part completly.
+   * @shortdescription Delets the part completly.
    */
   Distroy() {
     if (!this._isDistroyed) {
@@ -149,13 +149,13 @@ class Instance {
 
   /**
    * Returns an array containing all of the Instance’s direct children, or every Instance whose Parent is equal to the object.
-   * @shortdecription Returns the children
+   * @shortdescription Returns the children
    */
   GetChildren = () => {if (!this._isDistroyed && !this.Children) this.Children}
 
   /** 
    * The GetDescendants function of an object returns an array that contains all of the descendants of that object. Unlike Instance:GetChildren, which only returns the immediate children of an object, GetDescendants will find every child of the object, every child of those children, and so on and so forth.
-   * @shortdecription returns the tree of descendants
+   * @shortdescription returns the tree of descendants
    * 
    * @returns {Array<Instance>}
    */
@@ -177,7 +177,7 @@ class Instance {
 
   /**
    * IsA returns true if the Instance’s class is equivalent to or a subclass of a given class.
-   * @shortdecription Is an 'instanceof' a class
+   * @shortdescription Is an 'instanceof' a class
    * 
    * @param {String} className - The name of the class you want to check
    * 
@@ -187,7 +187,7 @@ class Instance {
 
   /**
    * Returns true if an Instance is an ancestor of the given descendant.
-   * @shortdecription Is an 'AncestorOf' a second Instance
+   * @shortdescription Is an 'AncestorOf' a second Instance
    * 
    * @param {Instance} descendant - the Instance you want to check
    * @returns {Boolean}
@@ -213,7 +213,7 @@ class Instance {
 
   /**
    * Returns true if an Instance is an ancestor of the given descendant.
-   * @shortdecription Is an 'DescendantOf' a second Instance
+   * @shortdescription Is an 'DescendantOf' a second Instance
    * 
    * @param {Instance} ancestor - The Instance you want to check
    * 

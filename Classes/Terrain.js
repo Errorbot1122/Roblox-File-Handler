@@ -4,10 +4,10 @@ const BasePart = require('./BasePart.js')
  * @inheritdoc
  * @class
  * 
- * @shortdecription Terrain
+ * @shortdescription Terrain
  * @classdesc Create dynamically morphable environments
  * 
- * @todo Finish shortdecriptions
+ * @todo Finish shortdescriptions
  */
 class Terrain extends BasePart {
   constructor() {

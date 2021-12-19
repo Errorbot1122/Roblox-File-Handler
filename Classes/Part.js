@@ -8,7 +8,7 @@ const FormFactorPart = require('./FormFactorPart.js');
  * @inheritdoc
  * @class
  * 
- * @shortdecription A physical object
+ * @shortdescription A physical object
  * @classdesc A physical object in the Roblox world
  */
 class Part extends FormFactorPart {
@@ -21,7 +21,7 @@ class Part extends FormFactorPart {
     /** 
      * [notreplicated]
      * Sets the type of shape the object has.
-     * @shortdecription The shape of the part
+     * @shortdescription The shape of the part
      * 
      * @type {PartType} 
      */

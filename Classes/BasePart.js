@@ -17,7 +17,7 @@ const Vector3 = require('../Datatypes/Vector3.js')
  * @class
  * @inheritdoc
  * 
- * @shortdecription The base class for parts
+ * @shortdescription The base class for parts
  * @classdesc A base class used to make a 3d objects 
  * Inharates [PVInstance]{@link PVInstance}
  */
@@ -32,7 +32,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines whether a part is immovable by physics
-     * @shortdecription Is immovable
+     * @shortdescription Is immovable
      * @type {Boolean}
     */ 
     this.Anchored = false;
@@ -40,7 +40,7 @@ class BasePart extends PVInstance {
     /**
      * [notreplicated]
      * The angular velocity of the part’s assembly
-     * @shortdecription Angular velocity of the part’s assembly
+     * @shortdescription Angular velocity of the part’s assembly
      * 
      * @type {Vector3}
      */ 
@@ -49,7 +49,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * The center of mass of the part’s assembly in world space
-     * @shortdecription Center of mass of the part’s assembly
+     * @shortdescription Center of mass of the part’s assembly
      * 
      * @type {Vector3}
      */  
@@ -58,7 +58,7 @@ class BasePart extends PVInstance {
     /**
      * [notreplicated]
      * The linear velocity of the part’s assembly world space
-     * @shortdecription Linear velocity of the part’s assembly
+     * @shortdescription Linear velocity of the part’s assembly
      * 
      * @type {Vector3}
      */   
@@ -67,7 +67,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * The total mass of the part’s assembly
-     * @shortdecription Mass of the part’s assembly
+     * @shortdescription Mass of the part’s assembly
      * @type {Number}
      */    
     this.AssemblyMass;
@@ -75,7 +75,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * A reference to the root part of the assembly
-     * @shortdecription Root part of the assembly
+     * @shortdescription Root part of the assembly
      * 
      * @type {BasePart}
      */ 
@@ -83,7 +83,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines the type of surface for the Back face of a part (+Z direction)
-     * @shortdecription The back face's SurfaceType
+     * @shortdescription The back face's SurfaceType
      * 
      * @type {SurfaceType}
      */  
@@ -91,7 +91,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines the type of surface for the Bottom face of a part (-Y direction)
-     * @shortdecription The bottom face's SurfaceType
+     * @shortdescription The bottom face's SurfaceType
      * 
      * @type {SurfaceType}
      */
@@ -100,7 +100,7 @@ class BasePart extends PVInstance {
     /**
      * [notreplicated]
      * Determines the color of a part
-     * @shortdecription The color of the part (Array)
+     * @shortdescription The color of the part (Array)
      * 
      * @type {BrickColor}
      */ 
@@ -108,7 +108,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines the position and rotation of a part in the world
-     * @shortdecription Position + Rotation Matix of the part
+     * @shortdescription Position + Rotation Matix of the part
      * 
      * @type {CFrame}
      */  
@@ -116,7 +116,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines whether a part may collide with other parts.
-     * @shortdecription If collsions get calulated
+     * @shortdescription If collsions get calulated
      * 
      * @type {Boolean}
      */   
@@ -129,7 +129,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines if the part will trigger Touched/TouchEnded events on other BaseParts with TouchTransmitters
-     * @shortdecription If the part can send touch events
+     * @shortdescription If the part can send touch events
      * 
      * @type {Boolean}
      */   
@@ -137,7 +137,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines whether or not a part casts a shadow
-     * @shortdecription If part can cast a shadow
+     * @shortdescription If part can cast a shadow
      * 
      * @type {Boolean}
      */   
@@ -146,7 +146,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * Describes the world position in which a part’s center of mass is located.
-     * @shortdecription The location the center of mass
+     * @shortdescription The location the center of mass
      * 
      * @type {Vector3} 
      */ 
@@ -154,7 +154,7 @@ class BasePart extends PVInstance {
     
     /**
      * Describes the automatically-set ID number of a part’s collision group
-     * @shortdecription The id for roblox collison groups
+     * @shortdescription The id for roblox collison groups
      * 
      * @type {Number}
      */
@@ -163,7 +163,7 @@ class BasePart extends PVInstance {
     /**
      * [notreplicated]
      * Determines the color of a part.
-     * @shortdecription The real color of the part
+     * @shortdescription The real color of the part
      * 
      * @type {Color3}
      */
@@ -177,7 +177,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines the type of surface for the Front face of a part (-Z direction)
-     * @shortdecription The front face's SurfaceType
+     * @shortdescription The front face's SurfaceType
      * 
      * @type {SurfaceType}
      */ 
@@ -185,7 +185,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines the type of surface for the Left face of a part (-X direction)
-     * @shortdecription The left face's SurfaceType
+     * @shortdescription The left face's SurfaceType
      * 
      * @type {SurfaceType}
      */ 
@@ -194,7 +194,7 @@ class BasePart extends PVInstance {
     /**
      * [hidden] [notreplicated]
      * Determines a multiplier for BasePart.Transparency that is only visible to the local client
-     * @shortdecription A multiplier for BasePart.Transparency
+     * @shortdescription A multiplier for BasePart.Transparency
      * 
      * @type {Number}
      */  
@@ -202,7 +202,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines whether a part is selectable in Studio.
-     * @shortdecription If part is selectable in Studio
+     * @shortdescription If part is selectable in Studio
      * 
      * @type {Boolean}
      */  
@@ -218,7 +218,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines whether the part contributes to the total mass or inertia of its rigid body
-     * @shortdecription Negates the mass
+     * @shortdescription Negates the mass
      * 
      * @type {Number}
      */   
@@ -226,7 +226,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines the texture and default physical properties of a part
-     * @shortdecription The texture and physical properties
+     * @shortdescription The texture and physical properties
      * 
      * @type {Material}
      */  
@@ -236,7 +236,7 @@ class BasePart extends PVInstance {
      * [notreplicated]
      * Describes the rotation of the part in the world
      * The rotation of the part using Tait–Bryan angles (Yaw, Pitch, and Roll)
-     * @shortdecription Rotation in Tait–Bryan angles
+     * @shortdescription Rotation in Tait–Bryan angles
      * 
      * @type {Vector3}
      */  
@@ -245,7 +245,7 @@ class BasePart extends PVInstance {
 
     /**
      * Specifies the offset of the part’s pivot from its CFrame.
-     * @shortdecription The pivit point for the CFrame
+     * @shortdescription The pivit point for the CFrame
      * 
      * @type {CFrame}
      */   
@@ -263,7 +263,7 @@ class BasePart extends PVInstance {
      /**
      * [hidden] [readonly] [notreplicated]
      * Time since last recorded physics update
-     * @shortdecription Time since last recorded physics update
+     * @shortdescription Time since last recorded physics update
      * 
      * @type {Number}
      */    
@@ -272,7 +272,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines how much a part reflects the skybox.
-     * @shortdecription How much the part reflects the skybox
+     * @shortdescription How much the part reflects the skybox
      * 
      * @type {Number}
      */  
@@ -281,7 +281,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * Describes the smallest change in size allowable by the Resize method
-     * @shortdecription The minimum change in size
+     * @shortdescription The minimum change in size
      * 
      * @type {Number}
      */ 
@@ -290,7 +290,7 @@ class BasePart extends PVInstance {
     /**
      * [readonly] [notreplicated]
      * Describes the faces on which a part may be resized
-     * @shortdecription Which faces may be resized
+     * @shortdescription Which faces may be resized
      * 
      * @type {Faces}
     */  
@@ -298,7 +298,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines the type of surface for the Right face of a part (+X direction)
-     * @shortdecription The right face's SurfaceType
+     * @shortdescription The right face's SurfaceType
      * 
      * @type {SurfaceType}
      */ 
@@ -316,7 +316,7 @@ class BasePart extends PVInstance {
      * The rotation of the part in degrees for the three axes
      * The rotation of the part using Eural Angles
      * 
-     * @shortdecription Rotation using Euler angles
+     * @shortdescription Rotation using Euler angles
      * @type {Vector3}
      */  
     this.Rotation;
@@ -330,7 +330,7 @@ class BasePart extends PVInstance {
 
     /**
      * Determines the type of surface for the Top face of a part (+Y direction)
-     * @shortdecription The top face's SurfaceType
+     * @shortdescription The top face's SurfaceType
      * 
      * @type {SurfaceType}
      */ 
@@ -338,7 +338,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines how much a part can be seen through (the inverse of part opacity)
-     * @shortdecription How see-through is the part
+     * @shortdescription How see-through is the part
      * 
      * @type {Number}
      */ 
