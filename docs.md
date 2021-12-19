@@ -198,6 +198,11 @@ _________________
 
 Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
 
+The callback func&#x27;s params are:
+
+errs: An Array of Errors (0 &#x3D; Read File Error, 1 &#x3D; Parse Error)
+newInstences: The new array of instances
+
 
 **scope**: *global*
 
@@ -725,4 +730,4 @@ Used to determine how a surface should be displayed on a part and how automatic 
 _________________
 
 
-<small><b>Last Updated:</b> Sun Dec 19 2021 17:37:25 GMT+0000 (Coordinated Universal Time).</small>
+<small><b>Last Updated:</b> Sun Dec 19 2021 20:41:07 GMT+0000 (Coordinated Universal Time).</small>
