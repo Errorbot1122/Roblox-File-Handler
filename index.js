@@ -13,7 +13,7 @@ const Instance = RoClasses.Instance;
 const xmlParser = new xml2js.Parser();
 
 /**
- * @description The name of the packege
+ * @description The name of the package
  * @private
  */
 const packageName = 'Roblox File Parser';
@@ -71,7 +71,7 @@ const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed
 
 
 /**
- * @shortdescription The all around 'to instance' converter
+ * @shortdescription The all-around 'to instance' converter
  * @description converts a Referent Id, Item into a valid Instance
  * 
  * @param {String|Item|Instance} instance - the instance you want to convert
@@ -131,7 +131,7 @@ function findFirstItemByClassName(itemList, className, parent) {
 /**
  * @shortdescription Property => Type
  * 
- * Converts an property into an valid type
+ * Converts a property into a valid type
  * @private
  * 
  * @param {*} property 
@@ -380,7 +380,7 @@ function objToInst(objs) {
 /**
  * Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
  * 
- * The callback func's params are:
+ * The callback function's params are:
  * 
  * errs: An Array of Errors (0 = Read File Error, 1 = Parse Error)
  * newInstences: The new array of instances

@@ -6,8 +6,8 @@ const BaseVector = require('./BaseVector.js')
  * @inheritdoc
  * @class
  * 
- * @shortdescription Colors from 0, 255
- * @classdesc Color3 but in the well know [0, 255] range
+ * @shortdescription Colors from 0 to 255
+ * @classdesc Color3 but in the well-know [0, 255] range
  */
 class Color3uint8 extends BaseVector {
   constructor(x, g, b, a = 255) {

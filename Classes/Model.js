@@ -9,7 +9,7 @@ const CFrame = RoTypes.CFrame
  * @inheritdoc
  * @class
  * 
- * @shortdescription An Object Contaner
+ * @shortdescription An Object Container
  * @classdesc Models are container objects, meaning they group objects together. They are best used to hold collections of BaseParts and have a number of functions that extend their functionality.
  */
 class Model extends PVInstance {
@@ -22,8 +22,8 @@ class Model extends PVInstance {
 
     /**
      * [notreplicated]
-     * Determines where the pivot of a Model which does not have a set Model.PrimaryPart is located.
-     * @shortdescription The pivot point for thr modle
+     * Determines where the pivot of a Model does not have a set Model.PrimaryPart is located.
+     * @shortdescription The pivot point for the model
      * 
      * @type {CFrame}
      */
@@ -31,7 +31,7 @@ class Model extends PVInstance {
 
     /**
      * Points to the primary part of the Model.
-     * @shortdescription The main part of the model
+     * @shortdescription The main "part" of the model
      * 
      * @type {BasePart}
      */

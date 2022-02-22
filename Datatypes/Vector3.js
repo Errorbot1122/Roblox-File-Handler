@@ -4,7 +4,7 @@ const BaseVector = require('./BaseVector.js')
  * @inheritdoc
  * @class
  * 
- * @classdesc An normel Vector3 value
+ * @classdesc A normal Vector3 value
  */
 class Vector3 extends BaseVector {
   constructor(x=0, y=0, z=0) {

@@ -8,7 +8,7 @@ const reMap = Globals.math.reMap
  * @class
  * 
  * @shortdescription Colors from 0 - 1
- * @classdesc Color3 is a data type that describes a color using R, G and B components, which are on the range [0, 1] 
+ * @classdesc Color3 is a data type that describes a color using R, G, and B components, which are on the range [0, 1] 
  */
 class Color3 extends BaseVector {
   constructor(r, g, b) {

@@ -7,7 +7,7 @@ const Model = require('./Model.js')
  * @shortdescription Rendering / Physics service
  * @classdec A service in which any objects that are to be rendered in the 3D world exist
  * 
- * @todo Finish shortdescriptions
+ * @todo Finish short descriptions
  */
 class Workspace extends Model {
   constructor() {

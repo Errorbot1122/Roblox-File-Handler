@@ -3,7 +3,7 @@ const RoModules = require('../dont_doc/RoModules')
 /**
  * @class 
  * 
- * @shortdescription The main Baseclass
+ * @shortdescription The base Roblox class
  * @classdesc Instance is the base class for all classes in the Roblox class hierarchy. Every other class that the Roblox engine defines inherits all of the members of Instance. 
  */
 class Instance {
@@ -13,7 +13,7 @@ class Instance {
 
     /**
      * Determines if an Instance can be cloned using {@link Instance:Clone} or saved to file.
-     * @shortdescription Can be cloned / saved
+     * @shortdescription Can be cloned/saved
      * 
      * @type {Boolean}
      */
@@ -63,8 +63,8 @@ class Instance {
     this.Children = []
 
     /**
-     * If the instance is currently distroyed
-     * @shortdescription If the instance is distroyed
+     * If the instance is currently destroyed
+     * @shortdescription If the instance is destroyed
      * 
      * @protected
      * @type {Boolean}
@@ -72,8 +72,8 @@ class Instance {
     this._isDistroyed = false
 
     /**
-     * The ID Roblox uses to refrence objects
-     * @shortdescription Refrence Id
+     * The ID Roblox uses to reference objects
+     * @shortdescription Reference Id
      * 
      * @type {String}
      */

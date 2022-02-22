@@ -6,8 +6,7 @@ const subPath = "../Classes";
 
 let exportRequired = {}
 
-// Function to get current filepaths
-// in directory
+// Function to get current filepaths in directory
 let filePaths = fs.readdirSync(directory_name);
   
 

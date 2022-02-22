@@ -1,1 +1,6 @@
 onBoot="npm config set prefix '~/.npm-global'; touch ~/.profile; export PATH=~/.npm-global/bin:$PATH; source ~/.profile; bash installGlobles.sh"
+run="npm run test"
+
+[packager]
+	language="nodejs-npm"
+	ignoredPaths=[".git"]

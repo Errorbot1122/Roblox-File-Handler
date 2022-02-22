@@ -18,7 +18,7 @@ const Vector3 = require('../Datatypes/Vector3.js')
  * @inheritdoc
  * 
  * @shortdescription The base class for parts
- * @classdesc A base class used to make a 3d objects 
+ * @classdesc A base class used to make 3d objects 
  * Inharates [PVInstance]{@link PVInstance}
  */
 class BasePart extends PVInstance {
@@ -202,7 +202,7 @@ class BasePart extends PVInstance {
     
     /**
      * Determines whether a part is selectable in Studio.
-     * @shortdescription If part is selectable in Studio
+     * @shortdescription If the part is selectable in Studio
      * 
      * @type {Boolean}
      */  
@@ -245,7 +245,7 @@ class BasePart extends PVInstance {
 
     /**
      * Specifies the offset of the part’s pivot from its CFrame.
-     * @shortdescription The pivit point for the CFrame
+     * @shortdescription The pivot point for the CFrame
      * 
      * @type {CFrame}
      */   

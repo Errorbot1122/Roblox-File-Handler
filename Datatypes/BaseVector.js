@@ -3,8 +3,8 @@ const Globals = require('../Globals.js')
 /**
  * @class
  * 
- * @shortdescription Base class for vecters
- * @classdesc The base class for all Vecter Objects in this packege
+ * @shortdescription Base class for vectors
+ * @classdesc The base class for all Vector Objects in this packege
  */
 class BaseVector {
   constructor(...values) {

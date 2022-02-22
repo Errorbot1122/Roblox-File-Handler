@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha || true",
-    "buildDoc": "npx jsdoc2md *.js !(node_modules|dont_doc|test)/*.js -t docs.hbs --helper dont_doc/customBlockHelpers.hbs.js > docs.md"
+    "buildDoc": "npx jsdoc2md *.js !(node_modules|dont_doc|test)/*.js -t dont_doc/docs.hbs --helper dont_doc/customBlockHelpers.hbs.js > docs.md"
   },
   "keywords": [],
   "author": "Errorbot1122",
