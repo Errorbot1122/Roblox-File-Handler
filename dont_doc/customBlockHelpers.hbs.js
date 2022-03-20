@@ -1,5 +1,7 @@
-const hbs = require('handlebars');
-var helpers = require('handlebars-helpers')();
+import * as hbs from 'handlebars'
+import * as helpersFunc from 'handlebars-helpers';
+
+const helpers = helpersFunc()
 
 // from: https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
 hbs.registerHelper("expif",function(v1, operator, v2, options) {

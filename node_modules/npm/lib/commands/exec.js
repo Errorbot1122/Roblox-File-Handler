@@ -1,6 +1,7 @@
 const libexec = require('libnpmexec')
 const BaseCommand = require('../base-command.js')
 const getLocationMsg = require('../exec/get-workspace-location-msg.js')
+const log = require('../utils/log-shim')
 
 // it's like this:
 //
@@ -28,50 +29,37 @@ const getLocationMsg = require('../exec/get-workspace-location-msg.js')
 // process.env.npm_lifecycle_event = 'npx'
 
 class Exec extends BaseCommand {
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get description () {
-    return 'Run a command from a local or remote npm package'
-  }
+  static description = 'Run a command from a local or remote npm package'
+  static params = [
+    'package',
+    'call',
+    'workspace',
+    'workspaces',
+    'include-workspace-root',
+  ]
 
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get params () {
-    return [
-      'package',
-      'call',
-      'workspace',
-      'workspaces',
-      'include-workspace-root',
-    ]
-  }
-
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get name () {
-    return 'exec'
-  }
-
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get usage () {
-    return [
-      '-- <pkg>[@<version>] [args...]',
-      '--package=<pkg>[@<version>] -- <cmd> [args...]',
-      '-c \'<cmd> [args...]\'',
-      '--package=foo -c \'<cmd> [args...]\'',
-    ]
-  }
+  static name = 'exec'
+  static usage = [
+    '-- <pkg>[@<version>] [args...]',
+    '--package=<pkg>[@<version>] -- <cmd> [args...]',
+    '-c \'<cmd> [args...]\'',
+    '--package=foo -c \'<cmd> [args...]\'',
+  ]
 
   async exec (_args, { locationMsg, path, runPath } = {}) {
-    if (!path)
+    if (!path) {
       path = this.npm.localPrefix
+    }
 
-    if (!runPath)
+    if (!runPath) {
       runPath = process.cwd()
+    }
 
     const args = [..._args]
     const call = this.npm.config.get('call')
     const {
       flatOptions,
       localBin,
-      log,
       globalBin,
     } = this.npm
     const output = (...outputArgs) => this.npm.output(...outputArgs)
@@ -79,8 +67,9 @@ class Exec extends BaseCommand {
     const packages = this.npm.config.get('package')
     const yes = this.npm.config.get('yes')
 
-    if (call && _args.length)
+    if (call && _args.length) {
       throw this.usageError()
+    }
 
     return libexec({
       ...flatOptions,

@@ -1,22 +1,50 @@
-const fs = require('fs');
-const xml2js = require('xml2js');
+import * as xml2js from 'xml2js';
+import * as fs from 'fs';
+
 //const util = require('util')
 
-const RoModules = require('./dont_doc/RoModules.js');
-//const Globles = require('./Globles.js');
+// Classes
+import BasePart 		from './Classes/BasePart.mjs'
+import FormFactorPart 	from './Classes/FormFactorPart.mjs'
+import GuiService 		from './Classes/GuiService.mjs'
+import Instance 		from './Classes/Instance.mjs'
+import Model	 		from './Classes/Model.mjs'
+import Part		 		from './Classes/Part.mjs'
+import PVInstance		from './Classes/PVInstance.mjs'
+import Terrain		 	from './Classes/Terrain.mjs'
+import Workspace		from './Classes/Workspace.mjs'
 
-const RoClasses = RoModules.Classes;
-const RoTypes = RoModules.Datatypes;
-const RoEnums = RoModules.Enum;
-const Instance = RoClasses.Instance;
+// Datatypes
+import BaseVector 		from './Datatypes/BaseVector.mjs'
+import CFrame 			from './Datatypes/CFrame.mjs'
+import Color3 			from './Datatypes/Color3.mjs'
+import Color3uint8 		from './Datatypes/Color3uint8.mjs'
+import Vector3	 		from './Datatypes/Vector3.mjs'
 
-const xmlParser = new xml2js.Parser();
+// Enums
+import InputType 		from './Enums/InputType.mjs'
+import Material 		from './Enums/Material.mjs'
+import PartType 		from './Enums/PartType.mjs'
+import SurfaceType 		from './Enums/SurfaceType.mjs'
+
+import _errorConverter 	from "./dont_doc/Errors.mjs"
+
+
+export const RoClasses	= {BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace}
+export const RoTypes 	= {BaseVector, CFrame, Color3, Color3uint8, Vector3}
+export const RoEnums	= {InputType, Material, PartType, SurfaceType}
+
+export const RoModules	= { ...RoClasses, ...RoTypes, ...RoEnums}
+
+export 					{ BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace, BaseVector, CFrame, Color3, Color3uint8, Vector3, InputType, Material, PartType, SurfaceType }
+
+const xmlParser			= new xml2js.Parser();
 
 /**
  * @description The name of the package
  * @private
  */
-const packageName = 'Roblox File Parser';
+const packageName	= 'Roblox File Parser';
 
 /**
  * @shortdescription instance look-up table
@@ -25,11 +53,11 @@ const packageName = 'Roblox File Parser';
  * @type {Object}
  * @private
  */
-let REFIDTOINSTANCE = {}
+let REFIDTOINSTANCE	= {}
 
-let debug = false;
-let showStack = true;
-let showExtraData = true;
+let debug			= false;
+let showStack		= true;
+let showExtraData	= true;
 
 /**
  * @shortdescription Valid XML tag checker
@@ -38,7 +66,7 @@ let showExtraData = true;
  * @param {*} xml_Tag - The object to check
  * @returns {Boolean}
 */
-function isXMLTag(xml_Tag) {
+export function isXMLTag(xml_Tag) {
   let isParsed = (typeof xml_Tag === 'object')
   
   if (isParsed) {
@@ -67,17 +95,17 @@ function isXMLTag(xml_Tag) {
  * @param {*} item - The object to check
  * @returns {Boolean}
  */
-const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed
+export const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed
 
 
 /**
  * @shortdescription The all-around 'to instance' converter
  * @description converts a Referent Id, Item into a valid Instance
  * 
- * @param {String|Item|Instance} instance - the instance you want to convert
+ * @param {String | Item | Instance} instance - the instance you want to convert
  * @returns {Instance}
  */
-function convertValidInstance(instance) {
+export function convertValidInstance(instance) {
 
   if (instance) {
 
@@ -85,7 +113,7 @@ function convertValidInstance(instance) {
 
       return REFIDTOINSTANCE[instance]
     }
-    else if (instance instanceof Instance) {
+    else if (instance instanceof RoClasses.Instance) {
 
       return instance
     }
@@ -104,10 +132,10 @@ function convertValidInstance(instance) {
  * 
  * @param {Array<Item>} itemList - A list of Item objects
  * @param {String} className - The name of the className
- * @param {String|Item|Instance} parent - The item's parent
+ * @param {String|Item|RoClasses.Instance} parent - The item's parent
  * @returns {null | Item}
  */
-function findFirstItemByClassName(itemList, className, parent) {
+export function findFirstItemByClassName(itemList, className, parent) {
   className = className.toLocaleLowerCase();
   
   for (let i in itemList) {
@@ -139,9 +167,9 @@ function findFirstItemByClassName(itemList, className, parent) {
  * @param {Object} localREFIDTOINSTANCE - The 'REFIDTOINSTANCE' it will use to find instances
  * @returns {*}
  */
-function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE = REFIDTOINSTANCE) {
-  propertyValue = property._;
-  propertyName = property.$.name;
+export function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE = REFIDTOINSTANCE) {
+  const propertyValue = property._;
+  const propertyName = property.$.name;
   
   switch (propertyTypeKey.toLowerCase()) {
     case 'string':
@@ -185,15 +213,15 @@ function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE 
       } 
       catch(err) { 
         if (debug) {  
-          console.log(colors.warn(`\n  Sorry, \n\n  but the package, ${packageName}, currently not support the datatype ${propertyTypeKey} is currently not suppourted with the proprety '${propertyName}', I will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`))
+          console.warn(`\n  Sorry, \n\n  but the package, ${packageName}, currently not support the datatype ${propertyTypeKey} is currently not suppourted with the proprety '${propertyName}', I will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`)
         
           if (showExtraData) {
             
-            console.log(colors.data(`\nValue: ${propertyValue}\n`))
+            console.log(`\nValue: ${propertyValue}\n`)
           }
           if (showStack) {
             
-            console.log(colors.info(`Stacktrace:\n==================\n${err.stack}\n\n`))
+            console.info(`Stacktrace:\n==================\n${err.stack}\n\n`)
           }
         }
 
@@ -222,12 +250,12 @@ function _convertPropertyToType(property, propertyTypeKey, localREFIDTOINSTANCE 
  * @description Convert an parsed XML Item into a valid roblox Instance if posible
  * 
  * @param {Item} item - The Item you want convert
- * @param {String|Item|Instance} parent - The item's parent
+ * @param {String|Item|RoClasses.Instance} parent - The item's parent
  * @param {Object} options - extra options
  * 
- * @return {Instance | Item}
+ * @return {RoClasses.Instance | Item}
  */
-function convertItemToInstance(item, parent, options) {
+export function convertItemToInstance(item, parent, options) {
 
   // just return the item if it is already parsed
   if (item.isParsed) {return item}
@@ -261,11 +289,11 @@ function convertItemToInstance(item, parent, options) {
     // Debug logs
     if (debug) {
 
-      console.log(colors.warn(`\n  Sorry,\n  but the package, ${packageName}, currently not support the Instance class '${returnInstClassName}'. We will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`));
+      console.warn(`\n  Sorry,\n  but the package, ${packageName}, currently not support the Instance class '${returnInstClassName}'. We will try to fix it ASAP. In the mean time you can report it to the GitHub Repo.\n`);
 
       if (showStack) {
 
-        console.log(colors.info(`\nStacktrace:\n==================\n${err.stack}\n`))
+        console.info(`\nStacktrace:\n==================\n${err.stack}\n`)
       }
     }
 
@@ -316,19 +344,20 @@ function convertItemToInstance(item, parent, options) {
  * @param {String} path - The file path to convert
  * @param {Function} callback - The callback function
  */
-function fileToObject(path, callback) {
+export function fileToObject(path, callback) {
 
   // Read the file
   fs.readFile(path, (rErr, data) => {
-    
+	
     if (rErr) {
-      callback([rErr, null], null, path);
+      callback(_errorConverter(rErr), null, path);
+	  return
     }
 
     // Parse the xml file
     xmlParser.parseString(data, (xErr, jsObject) => {
       
-      callback([rErr, xErr], jsObject, path);
+      callback(_errorConverter(xErr), jsObject, path);
     })
   })
 }
@@ -340,7 +369,7 @@ function fileToObject(path, callback) {
  * @param {String} xml - The XML data to convert
  * @param {Function} callback - The callback function
  */
-function xmlToObject(xml, callback) {
+export function xmlToObject(xml, callback) {
 
   // only parse the xlm
   xmlParser.parseString(xml, (xErr, jsObject) => {
@@ -354,7 +383,7 @@ function xmlToObject(xml, callback) {
  * 
  * @param {*} objs - A valed Item into an instance
  */
-function objToInst(objs) {
+export function objToInst(objs) {
   
   if (Array.isArray(objs)) {
     
@@ -390,43 +419,29 @@ function objToInst(objs) {
  * @param {String} path - The path to the file you want to parse
  * @param {*} callback - The callback function
  */
-function parseFile(path, callback) {
+export function parseFile(path, callback) {
 
-  fileToObject(path, (errs, result) => {
+  fileToObject(path, (err, result) => {
 
+
+	if (err) {
+		callback(_errorConverter(err))
+		return
+	}
+	  
     if (result.roblox) {
     
       const nexXMLObj = result.roblox
       let newInstences = []
 
-      items = nexXMLObj.Item
+      const items = nexXMLObj.Item
 
       items.forEach(item => {
         
         newInstences.push(convertItemToInstance(item))
       })
 
-      callback(errs, newInstences)
+      callback(err, newInstences)
     }
   });
-}
-
-module.exports = {
-  Classes: {
-    ...RoClasses,
-    ...RoTypes,
-  },
-  Roblox: {
-    Classes: RoClasses,
-    Datatypes: RoTypes,
-    Enum: RoEnums
-  },
-  isXMLTag,
-  isItem,
-  convertValidInstance,
-  findFirstItemByClassName,
-  fileToObject,
-  xmlToObject,
-  objToInst,
-  parseFile
 }

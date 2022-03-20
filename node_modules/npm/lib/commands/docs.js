@@ -1,39 +1,25 @@
-const log = require('npmlog')
 const pacote = require('pacote')
 const openUrl = require('../utils/open-url.js')
 const hostedFromMani = require('../utils/hosted-git-info-from-manifest.js')
-
+const log = require('../utils/log-shim')
 const BaseCommand = require('../base-command.js')
 class Docs extends BaseCommand {
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get description () {
-    return 'Open documentation for a package in a web browser'
-  }
+  static description = 'Open documentation for a package in a web browser'
+  static name = 'docs'
+  static params = [
+    'browser',
+    'registry',
+    'workspace',
+    'workspaces',
+    'include-workspace-root',
+  ]
 
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get name () {
-    return 'docs'
-  }
-
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get params () {
-    return [
-      'browser',
-      'registry',
-      'workspace',
-      'workspaces',
-      'include-workspace-root',
-    ]
-  }
-
-  /* istanbul ignore next - see test/lib/load-all-commands.js */
-  static get usage () {
-    return ['[<pkgname> [<pkgname> ...]]']
-  }
+  static usage = ['[<pkgname> [<pkgname> ...]]']
 
   async exec (args) {
-    if (!args || !args.length)
+    if (!args || !args.length) {
       args = ['.']
+    }
 
     await Promise.all(args.map(pkg => this.getDocs(pkg)))
   }
@@ -52,12 +38,14 @@ class Docs extends BaseCommand {
   }
 
   getDocsUrl (mani) {
-    if (mani.homepage)
+    if (mani.homepage) {
       return mani.homepage
+    }
 
     const info = hostedFromMani(mani)
-    if (info)
+    if (info) {
       return info.docs()
+    }
 
     return 'https://www.npmjs.com/package/' + mani.name
   }
