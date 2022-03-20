@@ -1,5 +1,3 @@
-import { parse as pathParser } from 'path'
-
 export class NotFoundError extends Error { 
 	constructor (message, originalError) {
 		super(message)
