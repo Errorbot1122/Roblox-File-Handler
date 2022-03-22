@@ -12,7 +12,6 @@ export default class Instance {
 		/**
 		 * Determines if an Instance can be cloned using {@link Instance:Clone} or saved to file.
 		 * @shortdescription Can be cloned/saved
-		 * 
 		 * @type {Boolean}
 		 */
 		this.Archivable = true
@@ -21,7 +20,6 @@ export default class Instance {
 		 * [readonly] [notreplicated]
 		 * A read-only string representing the class this Instance belongs to
 		 * @shortdescription The name of the class
-		 * 
 		 * @readonly
 		 * @type {String}
 		 */
@@ -29,7 +27,6 @@ export default class Instance {
 		
 		/**
 		 * A non-unique identifier of the Instance
-		 * 
 		 * @type {String}
 		 */
 		this.Name = ""
@@ -44,7 +41,6 @@ export default class Instance {
 		 * [hidden]
 		 * A deprecated property that used to protect CoreGui objects
 		 * @shortdescription (Deprecated!) Protects CoreGuis
-		 * 
 		 * @deprecated
 		 * @type {Boolean}
 		 */
@@ -55,7 +51,6 @@ export default class Instance {
 		
 		/**
 		 * An array of children
-		 * 
 		 * @type {Array<Instance>}
 		 */
 		this.Children = []
@@ -63,7 +58,6 @@ export default class Instance {
 		/**
 		 * If the instance is currently destroyed
 		 * @shortdescription If the instance is destroyed
-		 * 
 		 * @protected
 		 * @type {Boolean}
 		 */
@@ -72,7 +66,6 @@ export default class Instance {
 		/**
 		 * The ID Roblox uses to reference objects
 		 * @shortdescription Reference Id
-		 * 
 		 * @type {String}
 		 */
 		this.referentId = ""

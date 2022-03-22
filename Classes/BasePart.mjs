@@ -3,12 +3,12 @@
  */
 	
 /**
- * @typedef {import('../Enums/SurfaceType.mjs').SurfaceType}		SurfaceType
- * @typedef {import('../Enums/Material.mjs').Material}			Material
+ * @typedef {import('../Enums/SurfaceType.mjs').SurfaceType} SurfaceType
+ * @typedef {import('../Enums/Material.mjs').Material} Material
  *
- * @typedef {import('../Datatypes/Vector.mjs').Vector}			Vector
- * @typedef {import('../Datatypes/CFrame.mjs').CFrame}			CFrame
- * @typedef {import('../Datatypes/Color3.mjs').Color3}			Color3
+ * @typedef {import('../Datatypes/Vector.mjs').Vector} Vector
+ * @typedef {import('../Datatypes/CFrame.mjs').CFrame} CFrame
+ * @typedef {import('../Datatypes/Color3.mjs').Color3} Color3
  * 
  * @typedef {import('./PVInstance.mjs').PVInstance}				PVInstance
  */

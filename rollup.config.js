@@ -1,14 +1,20 @@
 import { uglify }		from 'rollup-plugin-uglify'
-import multi 			from '@rollup/plugin-multi-entry';
-import nodePolyfills 	from 'rollup-plugin-polyfill-node';
+import { babel }		from '@rollup/plugin-babel';
+//import sourcemaps		from 'rollup-plugin-sourcemaps'
+
+//import multi 			from '@rollup/plugin-multi-entry';
+//import nodePolyfills 	from 'rollup-plugin-node-polyfills';
 
 export default [
 	// Main Build
 	{
 		input: 'index.js',
 
-		plugins: [nodePolyfills( { fs: true } )],
-	
+		plugins: [
+			///sourcemaps(), 
+			babel( { babelHelpers: 'bundled' } )
+		],
+		
 		output: [
 			{
 				file: 'builds/robloxFileHandler.mjs',
@@ -38,25 +44,26 @@ export default [
 			},
 		]
 	},
-
+	/*
 	// Modules Build
 	{
 		// Select all the Classes, Datatypes and Enums
-		input: [ 'Classes/*.mjs', 'Datatypes/*.mjs', 'Enums/*.mjs' ],
+		input: [ 'Classes/Instance.mjs' ],
 		
 		plugins: [multi()],
 
 		output: [
 			{
-				file: 'builds/RoModules.mjs',
+				file: 'builds/extras/Modules/RoModules.mjs',
 				format: 'es'
 			},
 			{
-				file: 'builds/RoModules.min.mjs',
+				file: 'builds/extras/Modules/RoModules.min.mjs',
 				plugins: [uglify()],
 				format: 'es'
 			}
 		]
 		
 	}
+	*/
 ];

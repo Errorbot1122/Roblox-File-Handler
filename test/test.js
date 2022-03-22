@@ -4,7 +4,7 @@ import * as parser from '../index.js'
 
 let baseplateParse;
 
-//p//arser.parseFile('test/example_files/randomLargeTestMech.rbxlx', console.log)
+// todo: MORE TESTS!!!!
 
 describe('MAIN', () => {
 	

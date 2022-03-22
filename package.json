@@ -5,9 +5,14 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
+
+		"builddoc": "jsdoc2md Classes/*.mjs Datatypes/*.mjs Enums/*.mjs docs/docs.hbs --helper docs/customBlockHelpers.hbs.cjs -c docs/jsdoc.conf > builds/docs/docs.md",
+		
 		"build": "rollup --config",
-		"test": "npm run build; mocha || true",
-		"buildDoc": "npx jsdoc2md *.js !(node_modules|dont_doc|test)/*.js -t dont_doc/docs.hbs --helper dont_doc/customBlockHelpers.hbs.js > docs.md"
+		"postbuild": "npm run builddoc",
+
+		"pretest": "npm run build",
+		"test": "mocha || true"	
 	},
 	"keywords": [],
 	"author": "Errorbot1122",
@@ -15,11 +20,11 @@
 	"repository": "https://github.com/ErrorBot1122/Roblox-File-Handler",
 	"homepage": "https://github.com/ErrorBot1122/Roblox-File-Handler#readme",
 	"dependencies": {
-		"colors": "^1.4.0",
-		"npm": "^8.5.1",
 		"xml2js": "^0.4.23"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.17.8",
+		"@rollup/plugin-babel": "^5.3.1",
 		"@rollup/plugin-multi-entry": "^4.1.0",
 		"chai": "^4.3.6",
 		"handlebars": "^4.7.7",
@@ -27,7 +32,8 @@
 		"jsdoc-to-markdown": "^7.1.1",
 		"mocha": "^9.2.1",
 		"rollup": "^2.70.0",
-		"rollup-plugin-polyfill-node": "^0.8.0",
+		"rollup-plugin-node-polyfills": "^0.2.1",
+		"rollup-plugin-sourcemaps": "^0.6.3",
 		"rollup-plugin-uglify": "^6.0.4"
 	}
 }

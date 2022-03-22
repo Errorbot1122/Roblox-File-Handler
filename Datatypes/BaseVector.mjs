@@ -1,4 +1,4 @@
-import { lerp } from '../dont_doc/_Globals.mjs'
+import { lerp } from '../modules/_Globals.mjs'
 
 /**
  * @class

@@ -27,7 +27,7 @@ import Material 		from './Enums/Material.mjs'
 import PartType 		from './Enums/PartType.mjs'
 import SurfaceType 		from './Enums/SurfaceType.mjs'
 
-import _errorConverter 	from "./dont_doc/Errors.mjs"
+import _errorConverter 	from "./modules/Errors.mjs"
 
 
 export const RoClasses	= {BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace}

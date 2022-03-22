@@ -1,4 +1,4 @@
-import { toBytesInt32 } from '../dont_doc/_Globals.mjs';
+import { toBytesInt32 } from '../modules/_Globals.mjs';
 
 import BaseVector from './BaseVector.mjs'
 import Color3 from './Color3.mjs';
