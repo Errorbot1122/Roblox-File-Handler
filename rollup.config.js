@@ -1,19 +1,21 @@
-import { uglify }		from 'rollup-plugin-uglify'
-import { babel }		from '@rollup/plugin-babel';
+import { uglify }					from 'rollup-plugin-uglify'
+
+//import { getBabelOutputPlugin }		from '@rollup/plugin-babel'
+//import { nodeResolve }				from '@rollup/plugin-node-resolve'
 //import sourcemaps		from 'rollup-plugin-sourcemaps'
 
 //import multi 			from '@rollup/plugin-multi-entry';
 //import nodePolyfills 	from 'rollup-plugin-node-polyfills';
 
+
+function preserveComments(node, comment) {
+    return console.log(comment)
+}
+
 export default [
 	// Main Build
 	{
 		input: 'index.js',
-
-		plugins: [
-			///sourcemaps(), 
-			babel( { babelHelpers: 'bundled' } )
-		],
 		
 		output: [
 			{
@@ -24,27 +26,22 @@ export default [
 			{
 				globals: { xml2js: 'xml2js', fs: 'fs' },
 				file: 'builds/robloxFileHandler.js',
-				format: 'iife',
-				name: 'RBXFileHandler'
+				format: 'esm',
+				name: 'RBXHandler'
 			},
 			
 			{
-				file: 'builds/robloxFileHandler.min.mjs',
-				plugins: [uglify()],
-				format: 'es'
-			},
-			
-			{
-				globals: { xml2js: 'xml2js', fs: 'fs' },
+				globals: { xml2js: 'xml2js', fs: 'fs' },				
 				file: 'builds/robloxFileHandler.min.js',
-				plugins: [uglify()],
-				format: 'iife',
-				
-				name: 'RBXFileHandler'
+				plugins: [ uglify( { output: { comments: "some" } } ) ],
+				format: 'esm',
+				name: 'RBXHandler'
 			},
 		]
-	},
-	/*
+	}/*,
+
+	@todo Re-add RoModules build
+
 	// Modules Build
 	{
 		// Select all the Classes, Datatypes and Enums

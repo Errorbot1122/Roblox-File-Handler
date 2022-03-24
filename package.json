@@ -5,14 +5,10 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-
 		"builddoc": "jsdoc2md Classes/*.mjs Datatypes/*.mjs Enums/*.mjs docs/docs.hbs --helper docs/customBlockHelpers.hbs.cjs -c docs/jsdoc.conf > builds/docs/docs.md",
-		
 		"build": "rollup --config",
-		"postbuild": "npm run builddoc",
-
 		"pretest": "npm run build",
-		"test": "mocha || true"	
+		"test": "mocha || true"
 	},
 	"keywords": [],
 	"author": "Errorbot1122",
@@ -24,8 +20,10 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.17.8",
+		"@babel/preset-env": "^7.16.11",
 		"@rollup/plugin-babel": "^5.3.1",
 		"@rollup/plugin-multi-entry": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^13.1.3",
 		"chai": "^4.3.6",
 		"handlebars": "^4.7.7",
 		"handlebars-helpers": "^0.10.0",
