@@ -1,20 +1,20 @@
 /**
- * @typedef {import('../Datatypes/CFrame.mjs').CFrame}	CFrame
+ * @typedef {import('../Datatypes/CFrame.mjs').CFrame} CFrame
  * 
- * @typedef {import('./BasePart.mjs').BasePart}			PVInstance
+ * @typedef {import('./BasePart.mjs').BasePart} PVInstance
  */
 
-import PVInstance from "./PVInstance.mjs"
+import { PVInstance } from "./PVInstance.mjs"
 
 
 /**
  * @inheritdoc
  * @class
  * 
- * @shortdescription An Object Container
+ * @shortdescription An object container
  * @classdesc Models are container objects, meaning they group objects together. They are best used to hold collections of BaseParts and have a number of functions that extend their functionality.
  */
-export default class Model extends PVInstance {
+export class Model extends PVInstance {
   	constructor() {
 	
 	    super();

@@ -2,7 +2,7 @@
  * @shortdescription The specific type for a specific surface
  * @enum {Number} Used to determine how a surface should be displayed on a part and how automatic surface joints should behave.
  */
-const SurfaceType = {
+export const SurfaceType = {
 	
 	/** Makes the side appear without any surface detail (except for outlines) */
 	Smooth: 0,
@@ -37,5 +37,3 @@ const SurfaceType = {
 }
 
 Object.freeze(SurfaceType);
-
-export default SurfaceType;

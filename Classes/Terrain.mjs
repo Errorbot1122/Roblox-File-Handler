@@ -1,16 +1,19 @@
-import BasePart from './BasePart.mjs'
+import { BasePart } from './BasePart.mjs'
 
 /**
  * @inheritdoc
  * @class
  * 
- * @shortdescription Terrain
+ * @shortdescription Roblox's terrain container
  * @classdesc Create dynamically morphable environments
  * 
  * @todo Finish short descriptions
  */
-export default class Terrain extends BasePart {
+export class Terrain extends BasePart {
 	constructor() {
+		
+		super();
+		
 		/** 
 		 * [notscriptable]
 		 * Enables or disables terrain decoration.

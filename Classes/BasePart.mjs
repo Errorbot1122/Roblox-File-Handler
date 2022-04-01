@@ -10,21 +10,21 @@
  * @typedef {import('../Datatypes/CFrame.mjs').CFrame} CFrame
  * @typedef {import('../Datatypes/Color3.mjs').Color3} Color3
  * 
- * @typedef {import('./PVInstance.mjs').PVInstance}				PVInstance
+ * @typedef {import('./PVInstance.mjs').PVInstance}	PVInstance
  */
 
-import PVInstance from './PVInstance.mjs'
+import { PVInstance } from './PVInstance.mjs'
 
 
 /**
  * @class
  * @inheritdoc
  * 
- * @shortdescription The base class for parts
+ * @shortdescription Any physical object
  * @classdesc A base class used to make 3d objects 
  * Inharates [PVInstance]{@link PVInstance}
  */
-export default class BasePart extends PVInstance {
+export class BasePart extends PVInstance {
 	/**
 	* Init the part
 	* @constructor

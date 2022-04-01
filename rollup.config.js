@@ -4,18 +4,15 @@ import { uglify }					from 'rollup-plugin-uglify'
 //import { nodeResolve }				from '@rollup/plugin-node-resolve'
 //import sourcemaps		from 'rollup-plugin-sourcemaps'
 
-//import multi 			from '@rollup/plugin-multi-entry';
-//import nodePolyfills 	from 'rollup-plugin-node-polyfills';
-
-
-function preserveComments(node, comment) {
-    return console.log(comment)
-}
+import multi 			from '@rollup/plugin-multi-entry';
+import nodePolyfills	from 'rollup-plugin-polyfill-node';
 
 export default [
 	// Main Build
 	{
 		input: 'index.js',
+
+		//plugins: [ nodePolyfills( { fs: true } ) ],
 		
 		output: [
 			{
@@ -38,14 +35,12 @@ export default [
 				name: 'RBXHandler'
 			},
 		]
-	}/*,
-
-	@todo Re-add RoModules build
+	},
 
 	// Modules Build
 	{
 		// Select all the Classes, Datatypes and Enums
-		input: [ 'Classes/Instance.mjs' ],
+		input: [ 'Classes/*.mjs','Datatypes/*.mjs', 'Enums/*.mjs, modules/*.mjs' ],
 		
 		plugins: [multi()],
 
@@ -62,5 +57,4 @@ export default [
 		]
 		
 	}
-	*/
 ];

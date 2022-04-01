@@ -1,7 +1,7 @@
-import { toBytesInt32 } from '../modules/_Globals.mjs';
+import { toBytesInt32 }	from '../modules/_Globals.mjs';
 
-import BaseVector from './BaseVector.mjs'
-import Color3 from './Color3.mjs';
+import { BaseVector }	from './BaseVector.mjs'
+import { Color3 }		from './Color3.mjs';
 
 /**
  * @inheritdoc
@@ -10,7 +10,7 @@ import Color3 from './Color3.mjs';
  * @shortdescription Colors from 0 to 255
  * @classdesc Color3 but in the well-know [0, 255] range
  */
-export default class Color3uint8 extends BaseVector {
+export class Color3uint8 extends BaseVector {
 	constructor(x, g, b, a = 255) {
 		
 		super(a, x, g, b)

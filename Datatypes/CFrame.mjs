@@ -1,4 +1,4 @@
-import Vector3 from './Vector3.mjs';
+import { Vector3 }	from './Vector3.mjs';
 
 /**
  * @class
@@ -6,7 +6,7 @@ import Vector3 from './Vector3.mjs';
  * @shortdescription Roblox's CFrame
  * @classdesc CFrame, short for coordinate frame, is a data type that describes a 3D position and orientation
  */
-export default class CFrame {
+export class CFrame {
 	
 	constructor(x=0, y=0, z=0, R00=0, R01=0, R02=0, R10=0, R11=0, R12=0, R20=0, R21=0, R22=0) {
 		

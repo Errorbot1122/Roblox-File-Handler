@@ -2,53 +2,57 @@
  * @typedef {Object} Item
  */
 
-import * as xml2js		from 'xml2js';
-import * as fs			from 'fs';
+import * as fs					from 'fs';
+import * as xml2js				from 'xml2js';
 
 // Classes
-import BasePart 		from './Classes/BasePart.mjs'
-import FormFactorPart 	from './Classes/FormFactorPart.mjs'
-import GuiService 		from './Classes/GuiService.mjs'
-import Instance 		from './Classes/Instance.mjs'
-import Model	 		from './Classes/Model.mjs'
-import Part		 		from './Classes/Part.mjs'
-import PVInstance		from './Classes/PVInstance.mjs'
-import Terrain		 	from './Classes/Terrain.mjs'
-import Workspace		from './Classes/Workspace.mjs'
+import { BasePart }				from './Classes/BasePart.mjs'
+import { Camera }				from './Classes/Camera.mjs'
+import { Folder }				from './Classes/Folder.mjs'
+import { FormFactorPart }		from './Classes/FormFactorPart.mjs'
+import { GuiService } 			from './Classes/GuiService.mjs'
+import { Instance } 			from './Classes/Instance.mjs'
+import { Model }		 		from './Classes/Model.mjs'
+import { Part }					from './Classes/Part.mjs'
+import { Players }				from './Classes/Players.mjs'
+import { PVInstance }			from './Classes/PVInstance.mjs'
+import { Selection }			from './Classes/Selection.mjs'
+import { Terrain }			 	from './Classes/Terrain.mjs'
+import { Workspace }			from './Classes/Workspace.mjs'
 
 // Datatypes
-import BaseVector 		from './Datatypes/BaseVector.mjs'
-import CFrame 			from './Datatypes/CFrame.mjs'
-import Color3 			from './Datatypes/Color3.mjs'
-import Color3uint8 		from './Datatypes/Color3uint8.mjs'
-import Vector3	 		from './Datatypes/Vector3.mjs'
+import { BaseVector } 			from './Datatypes/BaseVector.mjs'
+import { CFrame } 				from './Datatypes/CFrame.mjs'
+import { Color3 } 				from './Datatypes/Color3.mjs'
+import { Color3uint8 } 			from './Datatypes/Color3uint8.mjs'
+import { Vector3 }	 			from './Datatypes/Vector3.mjs'
 
 // Enums
-import InputType 		from './Enums/InputType.mjs'
-import Material 		from './Enums/Material.mjs'
-import PartType 		from './Enums/PartType.mjs'
-import SurfaceType 		from './Enums/SurfaceType.mjs'
+import { InputType } 			from './Enums/InputType.mjs'
+import { Material } 			from './Enums/Material.mjs'
+import { PartType } 			from './Enums/PartType.mjs'
+import { SurfaceType } 			from './Enums/SurfaceType.mjs'
 
-import _errorConverter 	from "./modules/Errors.mjs"
+import { _errorToCustomError } 	from "./modules/Errors.mjs"
 
 
-export const RoClasses	= {BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace}
-export const RoTypes 	= {BaseVector, CFrame, Color3, Color3uint8, Vector3}
-export const RoEnums	= {InputType, Material, PartType, SurfaceType}
+export const RoClasses			= {BasePart, Camera, Folder, FormFactorPart, GuiService, Instance, Model, Part, Players, PVInstance, Selection, Terrain, Workspace}
+export const RoTypes 			= {BaseVector, CFrame, Color3, Color3uint8, Vector3}
+export const RoEnums			= {InputType, Material, PartType, SurfaceType}
 
-export const RoModules	= { ...RoClasses, ...RoTypes, ...RoEnums}
+export const RoModules			= { ...RoClasses, ...RoTypes, ...RoEnums}
 
-export 					{ BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace, BaseVector, CFrame, Color3, Color3uint8, Vector3, InputType, Material, PartType, SurfaceType }
+export 							{ BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace, BaseVector, CFrame, Color3, Color3uint8, Vector3, InputType, Material, PartType, SurfaceType }
 
-const xmlParser			= new xml2js.Parser();
+const xmlParser					= new xml2js.Parser();
 
-const _announced = []
+const _announced				= []
 
 /**
  * @description The name of the package
  * @private
  */
-const packageName		= 'Roblox File Parser';
+const packageName				= 'Roblox File Parser';
 
 /**
  * @shortdescription What types of errors get "thrown"
@@ -67,7 +71,7 @@ const packageName		= 'Roblox File Parser';
  *
  * @type {Number}
  */
-const logMode			= 1;
+const logMode					= 0
 
 /**
  * @shortdescription If you want to end the fuction if an error occors
@@ -75,7 +79,7 @@ const logMode			= 1;
  * 
  * @type {Boolean}
  **/
-const throwErrors		= false;
+const throwErrors				= false
 
 export class Parser {
 	constructor() {
@@ -98,23 +102,11 @@ export class Parser {
 	 */
 	toValidInstance(instance) {
 	
-	  if (instance) {
-	
-	    if (typeof instance === 'string') {
-	
-	      return this.REFIDTOINSTANCE[instance]
-	    }
-	    else if (instance instanceof RoClasses.Instance) {
-	
-	      return instance
-	    }
-	    else if (isItem(instance)) {
-	
-	      return this.itemToInstance(instance)
-	    }
-	  }
-	
-	  return null
+		if (!instance) return
+		
+		if (typeof instance === 'string') return this.REFIDTOINSTANCE[instance]
+		else if (instance instanceof RoClasses.Instance) return instance
+		else if (isItem(instance)) return this.itemToInstance(instance)
 	}
 
 	/**
@@ -144,7 +136,7 @@ export class Parser {
 			if (item.isParsed) return item
 		}
 		catch (e) {
-			if (options.returnErrors) throw _errorConverter(e) 
+			if (options.returnErrors) throw _errorToCustomError(e) 
 			return item
 		}
 		
@@ -160,12 +152,15 @@ export class Parser {
 		let convertedChildren = []
 		
 		let returnInst = null;
-		
+
 		try {
 			// Try to create the inst
 			returnInst = new RoClasses[returnInstClassName]();
 		}
-		catch(e) {
+		catch(err) { 
+				
+			if (logMode == 0) return;
+			
 			// Debug logs
 			log: if (logMode >= 1 && logMode <= 4) {
 				// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
@@ -178,19 +173,19 @@ export class Parser {
 				
 			}
 		    else if (logMode == 5) {
-				if (throwErrors) throw _errorConverter(err);
-				else console.error(_errorConverter(err));
+				if (throwErrors) throw _errorToCustomError(e);
+				else console.error(_errorToCustomError(e));
 			}
 			else {
-				if (throwErrors) throw err;
-				else console.error(err);
+				if (throwErrors) throw e;
+				else console.error(e);
 			}
 		
 			// returns the instance even if it is not parsed
 			item.isParsed = false;
 			
 			return item;
-		}
+		}4
 		
 		// set isParsed
 		returnInst.isParsed = true
@@ -220,10 +215,12 @@ export class Parser {
 			const propertyType = propertyTypes[propertyTypeKey];
 			
 			propertyType.forEach(property => {
-				try {
+				catchErr: try {
 					returnInst[property.$.name] = _convertPropertyToType(property, propertyTypeKey, options)
 				}
-				catch (e) {
+				catch(e) { 
+				
+					if (logMode == 0) break catchErr;
 					
 					// Debug logs
 					log: if (logMode >= 1 && logMode <= 4) {
@@ -238,11 +235,10 @@ export class Parser {
 					}
 				    else if (logMode == 5) {
 						
-						if (throwErrors) throw _errorConverter(err);
-						else console.error(_errorConverter(err));
+						if (throwErrors) throw _errorToCustomError(err);
+						else console.error(_errorToCustomError(err));
 					}
-					else {
-						
+					else {						
 						if (throwErrors) throw err;
 						else console.error(err);
 					}
@@ -269,7 +265,7 @@ export class Parser {
 			data = fs.readFileSync(path)
 		}
 		catch (e) {
-			throw _errorConverter(e)
+			throw _errorToCustomError(e)
 		}
 		
 		xmlParser.parseString(data, (err, jsObject) => { 
@@ -294,7 +290,7 @@ export class Parser {
 		xmlParser.parseString(xml, (err, jsObject) => {
 			
 			// throws the error if there is one
-			if (err) throw _errorConverter(err);
+			if (err) throw _errorToCustomError(err);
 			
 			output = jsObject;
 		})
@@ -408,27 +404,19 @@ export const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isPar
  * @param {Array<Item>} itemList - A list of Item objects
  * @param {String} className - The name of the className
  * @param {String|Item|RoClasses.Instance} parent - The item's parent
- * @returns {null | Item}
+ * @returns {Void | Item}
  */
 export function findFirstItemByClassName(itemList, className, parent) {
-  className = className.toLocaleLowerCase();
-  
-  for (let i in itemList) {
-
-    let item = itemList[i];
-    itemClass = item.$.class.toLocaleLowerCase();
-
-    if (itemClass == className) {
-
-      return item
-    }
-    else if (item.Item) {
-
-      return findFirstItemByClassName(item.Item, className)
-    }
-  }
-
-  return null
+	className = className.toLocaleLowerCase();
+	
+	for (let i in itemList) {
+	
+		let item = itemList[i];
+		itemClass = item.$.class.toLocaleLowerCase();
+		
+		if (itemClass == className) return item
+		else if (item.Item) return findFirstItemByClassName(item.Item, className)
+	}
 }
 
 /**
@@ -443,87 +431,95 @@ export function findFirstItemByClassName(itemList, className, parent) {
  * @returns {*}
  */
 export function _convertPropertyToType(property, propertyTypeKey, options, localREFIDTOINSTANCE) {
-  const propertyValue = property._;
-  const propertyName = property.$.name;
-  
-  switch (propertyTypeKey.toLowerCase()) {
-    case 'string':
+	const propertyValue = property._;
+	const propertyName = property.$.name;
+	
+	switch (propertyTypeKey.toLowerCase()) {
+		case 'string':
+		case 'ref':
 
-      // Add the string
-      return propertyValue;
-    case 'coordinateframe':
+		
+			// Add the string
+			return propertyValue;
+			
+		case 'int':
+		case 'int64':
+		case 'double':
+		case 'float':
+		case 'number':
 
-      // Convert the CFrame Proproty
-      return new RoTypes.CFrame(
-        Number(property.X), 
-        Number(property.Y), 
-        Number(property.Z), 
-        Number(property.R00), 
-        Number(property.R01), 
-        Number(property.R02), 
-        Number(property.R10), 
-        Number(property.R11), 
-        Number(property.R12), 
-        Number(property.R20), 
-        Number(property.R21), 
-        Number(property.R22)
-      );
-    case 'ref':
-      
-      // Add the ref
-      return localREFIDTOINSTANCE[propertyValue]
-    case 'color3uint8':
+			return new Number(propertyValue)
 
-      // Add the Color3
-      return new RoTypes.Color3uint8(Number(propertyValue))
+		case 'bool':
 
-      break;
-    default:
-      
-      let datatype;
-
-      try {
-        // Create the datatype
-        datatype = new RoTypes[propertyTypeKey]();
-      } 
-      catch(err) { 
-		log: if (logMode >= 1 && logMode <= 4) {
+			return new Boolean(propertyValue)
+			
+		case 'coordinateframe':
+		
+			// Convert the CFrame Proproty
+			return new RoTypes.CFrame(
+				Number(property.X), 
+				Number(property.Y), 
+				Number(property.Z), 
+				Number(property.R00), 
+				Number(property.R01), 
+				Number(property.R02), 
+				Number(property.R10), 
+				Number(property.R11), 
+				Number(property.R12), 
+				Number(property.R20), 
+				Number(property.R21), 
+				Number(property.R22)
+			);		
+		case 'color3uint8':
+		
+			// Add the Color3
+			return new RoTypes.Color3uint8(Number(propertyValue))
+			
+			break;
+		default:
+			
+			let datatype;
+			
+			catchErr: try {
+				// Create the datatype
+				datatype = new RoTypes[propertyTypeKey]();
+			} 
+			catch(err) { 
+				
+				if (logMode == 0) break catchErr;
+				
+				log: if (logMode >= 1 && logMode <= 4) {
+							
+					// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
+					if (_announced.indexOf(propertyTypeKey) != -1) break log;
+					
+					console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`)
+					
+					// Add this to the array to prevent repeat "announcing"
+					_announced.push(propertyTypeKey)
+				}
+				else if (logMode == 5) {
+			
+					if (throwErrors) throw _errorToCustomError(err);
+					else console.error(_errorToCustomError(err));
+				}
+				else {					
+					if (throwErrors) throw err;
+					else console.error(err);
+				}
+			
+				return propertyValue
+			}
+			
+			for (const datatypeValueKey in datatype) {
+				if (property[datatypeValueKey]) {
+					const newPropertyValue = property[datatypeValueKey]
+					
+					datatype[datatypeValueKey] = JSON.parse(newPropertyValue)
+				}
+			}
 						
-			// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
-			if (_announced.indexOf(propertyTypeKey) != -1) break log;
-	
-			console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`)
-	
-			// Add this to the array to prevent repeat "announcing"
-			_announced.push(propertyTypeKey)
-		}
-		else if (logMode == 5) {
-			
-			if (throwErrors) throw _errorConverter(err);
-			else console.error(_errorConverter(err));
-		}
-		else {
-			
-			if (throwErrors) throw err;
-			else console.error(err);
-		}
-
-		return propertyValue
-	  }
-
-      for (const datatypeValueKey in datatype) {
-        
-        if (property[datatypeValueKey]) {
-          const newPropertyValue = property[datatypeValueKey]
-
-          datatype[datatypeValueKey] = JSON.parse(newPropertyValue)
-        }
-      }
-
-      return datatype
-
-      break; 
-  }
-
-  return
+			break; 
+	}
 }

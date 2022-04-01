@@ -6,7 +6,7 @@
  * 
  * ![Block, sphere, and cylinder parts](https://developer.roblox.com/assets/bltcb9ef55958be7a0e/PartTypes.jpg)
  */
-const PartType = {
+export const PartType = {
 	/** A ball shaped part */
 	Ball: 0,
 	
@@ -18,5 +18,3 @@ const PartType = {
 }
 
 Object.freeze(PartType);
-
-export default PartType;

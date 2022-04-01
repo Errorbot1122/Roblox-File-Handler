@@ -1,4 +1,4 @@
-import { lerp } from '../modules/_Globals.mjs'
+import { lerp }	from '../modules/_Globals.mjs'
 
 /**
  * @class
@@ -6,7 +6,7 @@ import { lerp } from '../modules/_Globals.mjs'
  * @shortdescription Base class for vectors
  * @classdesc The base class for all Vector Objects in this packege
  */
-export default class BaseVector {
+export class BaseVector {
 	constructor(...values) {
 		
 		this.values = values

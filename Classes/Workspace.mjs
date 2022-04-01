@@ -1,19 +1,19 @@
 /**
- * @typedef {import('./Terrain.mjs').Terrain}
+ * @typedef {import('./Terrain.mjs').Terrain} Terrain
  */
 
-import Model from './Model.mjs'
+import { Model } from './Model.mjs'
 
 /**
  * @inheritdoc
  * @class
  * 
- * @shortdescription Rendering / Physics service
+ * @shortdescription Roblox's Rendering & Physics Handler
  * @classdec A service in which any objects that are to be rendered in the 3D world exist
  * 
  * @todo Finish short descriptions
  */
-export default class Workspace extends Model {
+export class Workspace extends Model {
 	constructor() {
 		
 		super();

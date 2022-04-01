@@ -2,16 +2,16 @@
  * @typedef {import('../Enums/PartType.js').PartType} PartType
  */
 
-import FormFactorPart from './FormFactorPart.mjs'
+import { FormFactorPart } from './FormFactorPart.mjs'
 
 /**
  * @inheritdoc
  * @class
  * 
- * @shortdescription A physical object
+ * @shortdescription A standerd physical object
  * @classdesc A physical object in the Roblox world
  */
-export default class Part extends FormFactorPart {
+export class Part extends FormFactorPart {
 	constructor() {
 	
 		super();

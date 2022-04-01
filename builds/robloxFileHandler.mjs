@@ -1,15 +1,14 @@
-import * as xml2js from 'xml2js';
 import * as fs from 'fs';
+import * as xml2js from 'xml2js';
 
 /**
  * @class 
  * 
- * @shortdescription The base Roblox class
+ * @shortdescription Roblox's base object 
  * @classdesc Instance is the base class for all classes in the Roblox class hierarchy. Every other class that the Roblox engine defines inherits all of the members of Instance. 
  */
 class Instance {
-	constructor() {
-		
+	constructor() {		
 		// Roblox's Vars
 		
 		/**
@@ -26,13 +25,13 @@ class Instance {
 		 * @readonly
 		 * @type {String}
 		 */
-		this.ClassName = "Instance";
+		this.ClassName = this.constructor.name;
 		
 		/**
 		 * A non-unique identifier of the Instance
 		 * @type {String}
 		 */
-		this.Name = "";
+		this.Name = this.constructor.name;
 		
 		/**
 		 * Determines the hierarchical parent of the Instance
@@ -225,7 +224,7 @@ class Instance {
  * @inheritdoc
  * @class
  * 
- * @shortdescription Base class for everything with a location
+ * @shortdescription Instances with locations
  * @classdesc The base class for all objects that have a physical location in the world, specifically {@link BaseParts} and {@link Model}
  */
 class PVInstance extends Instance {
@@ -243,7 +242,7 @@ class PVInstance extends Instance {
  * @class
  * @inheritdoc
  * 
- * @shortdescription The base class for parts
+ * @shortdescription Any physical object
  * @classdesc A base class used to make 3d objects 
  * Inharates [PVInstance]{@link PVInstance}
  */
@@ -575,11 +574,134 @@ class BasePart extends PVInstance {
 }
 
 /**
+ * @typedef {import('./Instance.mjs').Instance} Instance
+ *
+ * @typedef {import('../Datatypes/CFrame.mjs').CFrame} CFrame
+ * @typedef {import('../Datatypes/Vector2.mjs').Vector2} Vector2
+ *
+ * @typedef {import('../Enms/CameraType.mjs').CameraType} CameraType
+ * @typedef {import('../Enms/FieldOfViewMode.mjs').FieldOfViewMode} FieldOfViewMode
+ */
+
+/**
+ * @class
+ * @inheritdoc
+ * 
+ * @shortdescription A 3D veiw-object
+ * @classdesc The Camera object defines a view of the 3D game world.
+ * Inharates {@link Instance}
+ * 
+ * @todo Finish short descriptions
+ */
+class Camera extends Instance {
+	constructor() {
+		
+		super();
+
+		/**
+		 * The CFrame of the Camera, defining its position and orientation in the 3D world
+		 * @type {CFrame}
+		 */
+		this.CFrame; 
+
+		/** 
+		 * The Humanoid or BasePart that is the Camera's subject
+		 * @type {Instance}
+		 */
+		this.CameraSubject;
+
+		/** 
+		 * Specifies the CameraType to be read by the camera scripts
+		 * @type {CameraType}
+		 */ 
+		this.CameraType;
+
+		/**
+		 * Sets the angle of the Camera's diagonal field of view.
+		 * [notreplicated]
+		 * @type {Number}
+		 */
+		this.DiagonalFieldOfView;
+
+		/**
+		 * Sets the angle of the Camera's vertical field of view
+		 * @type {Number}
+		 */ 
+		this.FieldOfView;
+		
+		/**
+		 * Determines the FOV value of the Camera that’s invariant under viewport size changes.
+		 * @type {FieldOfViewMode}
+		 */
+		this.FieldOfViewMode;
+		
+		/**
+		 * Sets the area in 3D space that is prioritized by Roblox’s graphical systems
+		 * @type {CFrame}
+		 */ 
+		this.Focus;
+		
+		/**
+		 * Toggles whether the Camera will automatically track the head motion of a player using a VR device
+		 * @type {Boolean}
+		 */
+		this.HeadLocked;
+		
+		/**
+		 * Sets the scale of the user’s head when using VR
+		 * @type {Number}
+		 */
+		this.HeadScale;
+		
+		/**
+		 * Sets the angle of the Camera's field of view along the longest viewport axis.
+		 * [notreplicated]
+		 * @type {Number}
+		 */
+		this.MaxAxisFieldOfView;
+		
+		/**
+		 * Describes the negative z-offset, in studs, of the Camera's near clipping plane
+		 * [readonly] [notreplicated]
+		 * @type {Number}
+		 */
+		this.NearPlaneZ;
+
+		
+		/**
+		 * Describes the dimensions, in pixels, of the client’s viewport
+		 * [readonly] [notreplicated]
+		 * @type {Vector2}
+		 */
+		this.ViewportSize;
+	}
+}
+
+/**
+ * @typedef {import('./Instance.mjs').Instance} Instance
+ */
+
+/**
+ * @class
+ * @inheritdoc
+ * 
+ * @shortdescription A simple organizer
+ * @classdesc A simple container used to hold and organize Roblox objects.
+ * Inharates {@link Instance}
+ * 
+ * @todo Finish short descriptions
+ */
+class Folder extends Instance {
+	constructor() {
+		super();
+	}
+}
+
+/**
  * @class
  * @inheritdoc
  * 
  * @deprecated Deprecated by Roblox
- * 
  * 
  * @shortdesc Deprecated by Roblox
  * @classdesc The FormFactorPart class is an abstract class
@@ -587,67 +709,68 @@ class BasePart extends PVInstance {
  */
 class FormFactorPart extends BasePart {
 	constructor() {
-	
 		super();
 	}
 }
 
 /**
- * @typedef {import('./GuiObject.mjs').GuiObject}
+ * @typedef {import('./GuiObject.mjs').GuiObject} GuiObject
  */
 
 /**
  * @class
  * @inheritdoc
  * 
- * @shortdescription Roblox's GuiSevice
+ * @shortdescription Roblox's Gui handler
  * @classdesc The GuiService is a service which currently allows developers to control what GuiObject is currently being selected by the gamepad navigator.
  * Inharates {@link Instance}
  * 
  * @todo Finish short descriptions
  */
 class GuiService extends Instance {
-  constructor() {
-    
-    /**
-     * If the select button on a gamepad will automatically set a GUI as the selected object when the Select button is pressed. Turning this off will mean that Gui navigation will still work if GuiNavigationEnabled is enabled but you will have to set SelectedObject manually to start Gui navigation.
-     * @type {Boolean}
-     */
-    this.AutoSelectGuiEnabled;
-    
-
-    /**
-     * Toggles whether or not objects in the CoreGui can be navigated using a Gamepad.
-     * @type {Boolean} 
-     */
-    this.CoreGuiNavigationEnabled;
-    
-    /**
-     * Used to enable and disable the default controller GUI navigation.
-     * @type {Boolean} 
-     */
-    this.GuiNavigationEnabled;
-    
-    /**
-     * [readonly] [notreplicated]
-     * Returns true if any menu of CoreGui is open
-     * @type {Boolean} 
-     */
-    this.MenuIsOpen;
-    
-
-    /**
-     * Sets the GuiObject currently being focused on by the GUI Navigator (used for Gamepads)
-     * @type {GuiObject} 
-     */
-    this.SelectedObject;
-  }
+	constructor() {
+		
+		super();
+		  
+		/**
+		 * If the select button on a gamepad will automatically set a GUI as the selected object when the Select button is pressed. Turning this off will mean that Gui navigation will still work if GuiNavigationEnabled is enabled but you will have to set SelectedObject manually to start Gui navigation.
+		 * @type {Boolean}
+		 */
+		this.AutoSelectGuiEnabled;
+		
+		
+		/**
+		 * Toggles whether or not objects in the CoreGui can be navigated using a Gamepad.
+		 * @type {Boolean} 
+		 */
+		this.CoreGuiNavigationEnabled;
+		
+		/**
+		 * Used to enable and disable the controller GUI navigation.
+		 * @type {Boolean} 
+		 */
+		this.GuiNavigationEnabled;
+		
+		/**
+		 * [readonly] [notreplicated]
+		 * Returns true if any menu of CoreGui is open
+		 * @type {Boolean} 
+		 */
+		this.MenuIsOpen;
+		
+		
+		/**
+		 * Sets the GuiObject currently being focused on by the GUI Navigator (used for Gamepads)
+		 * @type {GuiObject} 
+		 */
+		this.SelectedObject;
+	}
 }
 
 /**
- * @typedef {import('../Datatypes/CFrame.mjs').CFrame}	CFrame
+ * @typedef {import('../Datatypes/CFrame.mjs').CFrame} CFrame
  * 
- * @typedef {import('./BasePart.mjs').BasePart}			PVInstance
+ * @typedef {import('./BasePart.mjs').BasePart} PVInstance
  */
 
 
@@ -655,7 +778,7 @@ class GuiService extends Instance {
  * @inheritdoc
  * @class
  * 
- * @shortdescription An Object Container
+ * @shortdescription An object container
  * @classdesc Models are container objects, meaning they group objects together. They are best used to hold collections of BaseParts and have a number of functions that extend their functionality.
  */
 class Model extends PVInstance {
@@ -699,7 +822,7 @@ class Model extends PVInstance {
  * @inheritdoc
  * @class
  * 
- * @shortdescription A physical object
+ * @shortdescription A standerd physical object
  * @classdesc A physical object in the Roblox world
  */
 class Part extends FormFactorPart {
@@ -721,16 +844,146 @@ class Part extends FormFactorPart {
 }
 
 /**
+ * @typedef {import('./Player.mjs').Player} Player
+ */
+
+/**
+ * @class
+ * @inheritdoc
+ * 
+ * @shortdescription The Roblox's client handler
+ * @classdesc The Players game service contains only Player objects for presently connected clients to a Roblox game server.
+ * Inharates {@link Instance}
+ * 
+ * @todo Finish short descriptions
+ */
+class Players extends Instance {
+	constructor() {
+		
+		super();
+		
+		/**
+		 * @type {Boolean}
+		 *
+		 *  [readonly] [notreplicated]
+		 * Indicates whether or not bubble chat is enabled. It is set with the Players:SetChatStyle method.
+		 */
+		this.BubbleChat;
+		
+		/**
+		 * @type {Boolean} 
+		 *
+		 *  [notreplicated]
+		 * Indicates whether Characters will respawn automatically.
+		 */
+		this.CharacterAutoLoads;
+		
+		/**
+		 * @type {Boolean} 
+		 *
+		 *  [readonly] [notreplicated]
+		 * Indicates whether or not classic chat is enabled; set by the Players:SetChatStyle method.
+		 */
+		this.ClassicChat;
+
+		/*
+		 * @type {Player} 
+		 *
+		 *  [readonly] [notreplicated]
+		 * The Player that the LocalScript is running for.
+		 */		
+		this.LocalPlayer;
+		
+		/*
+		 * @type {Number} 
+		 *
+		 *  [readonly] [notreplicated]
+		 * The maximum amount of players that can be in this server.
+		 */
+		this.MaxPlayers;
+
+		/*
+		 * @type {Number} 
+		 *
+		 *  [hidden]
+		 * Players.MaxPlayers for Numberernal use.
+		 */
+		this.MaxPlayersNumberernal;
+
+		/*
+		 * @type {Number}  
+		 *
+		 *  [readonly] [notreplicated]
+		 * The preferred amount of players for this server.
+		 */
+		this.PreferredPlayers;
+
+		/*
+		 * @type {Number}  
+		 *
+		 *  [hidden]
+		 * Players.PreferredPlayers for Numberernal use.
+		 */
+		this.PreferredPlayersNumberernal;
+
+		/*
+		 * @type {Number}  
+		 *
+		 * Controls the amount of time taken for a players character to respawn
+		*/
+		this.RespawnTime;
+	}
+}
+
+/**
+ * @typedef {import('./Instance.mjs').Instance} Instance
+ */
+
+/**
+ * @class
+ * @inheritdoc
+ * 
+ * @shortdescription Handles selected objects in Studio
+ * @classdesc The Selection service controls the Instances that are selected in Roblox Studio.
+ * Inharates {@link Instance}
+ * 
+ * @todo Finish short descriptions
+ */
+class Selection extends Instance {
+	constructor() {
+		super();
+
+		/**
+		 * @type {Instance} 
+		 *
+		 *  [hidden] [readonly] [notreplicated]
+		 */
+		this.ActiveInstance;
+
+		
+		/**
+		 * @type {Number} 
+		 *
+		 *  [readonly] [notreplicated]
+		 */
+		this.SelectionThickness;
+	}
+}
+
+/**
  * @inheritdoc
  * @class
  * 
- * @shortdescription Terrain
+ * @shortdescription Roblox's terrain container
  * @classdesc Create dynamically morphable environments
  * 
  * @todo Finish short descriptions
  */
 class Terrain extends BasePart {
 	constructor() {
+		
+		super();
+		
 		/** 
 		 * [notscriptable]
 		 * Enables or disables terrain decoration.
@@ -797,14 +1050,14 @@ class Terrain extends BasePart {
 }
 
 /**
- * @typedef {import('./Terrain.mjs').Terrain}
+ * @typedef {import('./Terrain.mjs').Terrain} Terrain
  */
 
 /**
  * @inheritdoc
  * @class
  * 
- * @shortdescription Rendering / Physics service
+ * @shortdescription Roblox's Rendering & Physics Handler
  * @classdec A service in which any objects that are to be rendered in the 3D world exist
  * 
  * @todo Finish short descriptions
@@ -1445,15 +1698,13 @@ function _errorToCustomError(error) {
  */
 
 
-const RoClasses	= {BasePart, FormFactorPart, GuiService, Instance, Model, Part, PVInstance, Terrain, Workspace};
-const RoTypes 	= {BaseVector, CFrame, Color3, Color3uint8, Vector3};
-const RoEnums	= {InputType, Material, PartType, SurfaceType};
+const RoClasses			= {BasePart, Camera, Folder, FormFactorPart, GuiService, Instance, Model, Part, Players, PVInstance, Selection, Terrain, Workspace};
+const RoTypes 			= {BaseVector, CFrame, Color3, Color3uint8, Vector3};
+const RoEnums			= {InputType, Material, PartType, SurfaceType};
 
-const RoModules$1	= { ...RoClasses, ...RoTypes, ...RoEnums};
+const RoModules$1			= { ...RoClasses, ...RoTypes, ...RoEnums};
 
-const xmlParser			= new xml2js.Parser();
-
-const _announced = [];
+const xmlParser					= new xml2js.Parser();
 
 class Parser {
 	constructor() {
@@ -1476,23 +1727,11 @@ class Parser {
 	 */
 	toValidInstance(instance) {
 	
-	  if (instance) {
-	
-	    if (typeof instance === 'string') {
-	
-	      return this.REFIDTOINSTANCE[instance]
-	    }
-	    else if (instance instanceof RoClasses.Instance) {
-	
-	      return instance
-	    }
-	    else if (isItem(instance)) {
-	
-	      return this.itemToInstance(instance)
-	    }
-	  }
-	
-	  return null
+		if (!instance) return
+		
+		if (typeof instance === 'string') return this.REFIDTOINSTANCE[instance]
+		else if (instance instanceof RoClasses.Instance) return instance
+		else if (isItem(instance)) return this.itemToInstance(instance)
 	}
 
 	/**
@@ -1538,30 +1777,15 @@ class Parser {
 		let convertedChildren = [];
 		
 		let returnInst = null;
-		
+
 		try {
 			// Try to create the inst
 			returnInst = new RoClasses[returnInstClassName]();
 		}
-		catch(e) {
-			// Debug logs
-			log: {
-				// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
-				if (_announced.indexOf(returnInstClassName) != -1) break log;
-
-				console.warn(`Instance Class '${returnInstClassName}' is currentlly unsported\n`);
-
-				// Add this to the array to prevent repeat "announcing"
-				_announced.push(returnInstClassName);
+		catch(err) { 
 				
-			}
-		
-			// returns the instance even if it is not parsed
-			item.isParsed = false;
-			
-			return item;
-		}
-		
+			return;
+		}		
 		// set isParsed
 		returnInst.isParsed = true;
 		
@@ -1590,22 +1814,12 @@ class Parser {
 			const propertyType = propertyTypes[propertyTypeKey];
 			
 			propertyType.forEach(property => {
-				try {
+				catchErr: try {
 					returnInst[property.$.name] = _convertPropertyToType(property, propertyTypeKey, options);
 				}
-				catch (e) {
-					
-					// Debug logs
-					log: {
-						
-						// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
-						if (_announced.indexOf(propertyTypeKey) != -1) break log;
-		
-						console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`);
-		
-						// Add this to the array to prevent repeat "announcing"
-						_announced.push(propertyTypeKey);
-					}
+				catch(e) { 
+				
+					break catchErr;
 				}
 			});
 		}
@@ -1767,27 +1981,19 @@ const isItem = item => (isXMLTag(item) && item.$.referent) || !item.isParsed;
  * @param {Array<Item>} itemList - A list of Item objects
  * @param {String} className - The name of the className
  * @param {String|Item|RoClasses.Instance} parent - The item's parent
- * @returns {null | Item}
+ * @returns {Void | Item}
  */
 function findFirstItemByClassName(itemList, className, parent) {
-  className = className.toLocaleLowerCase();
-  
-  for (let i in itemList) {
-
-    let item = itemList[i];
-    itemClass = item.$.class.toLocaleLowerCase();
-
-    if (itemClass == className) {
-
-      return item
-    }
-    else if (item.Item) {
-
-      return findFirstItemByClassName(item.Item, className)
-    }
-  }
-
-  return null
+	className = className.toLocaleLowerCase();
+	
+	for (let i in itemList) {
+	
+		let item = itemList[i];
+		itemClass = item.$.class.toLocaleLowerCase();
+		
+		if (itemClass == className) return item
+		else if (item.Item) return findFirstItemByClassName(item.Item, className)
+	}
 }
 
 /**
@@ -1802,73 +2008,73 @@ function findFirstItemByClassName(itemList, className, parent) {
  * @returns {*}
  */
 function _convertPropertyToType(property, propertyTypeKey, options, localREFIDTOINSTANCE) {
-  const propertyValue = property._;
-  property.$.name;
-  
-  switch (propertyTypeKey.toLowerCase()) {
-    case 'string':
+	const propertyValue = property._;
+	property.$.name;
+	
+	switch (propertyTypeKey.toLowerCase()) {
+		case 'string':
+		case 'ref':
 
-      // Add the string
-      return propertyValue;
-    case 'coordinateframe':
+		
+			// Add the string
+			return propertyValue;
+			
+		case 'int':
+		case 'int64':
+		case 'double':
+		case 'float':
+		case 'number':
 
-      // Convert the CFrame Proproty
-      return new RoTypes.CFrame(
-        Number(property.X), 
-        Number(property.Y), 
-        Number(property.Z), 
-        Number(property.R00), 
-        Number(property.R01), 
-        Number(property.R02), 
-        Number(property.R10), 
-        Number(property.R11), 
-        Number(property.R12), 
-        Number(property.R20), 
-        Number(property.R21), 
-        Number(property.R22)
-      );
-    case 'ref':
-      
-      // Add the ref
-      return localREFIDTOINSTANCE[propertyValue]
-    case 'color3uint8':
+			return new Number(propertyValue)
 
-      // Add the Color3
-      return new RoTypes.Color3uint8(Number(propertyValue))
-    default:
-      
-      let datatype;
+		case 'bool':
 
-      try {
-        // Create the datatype
-        datatype = new RoTypes[propertyTypeKey]();
-      } 
-      catch(err) { 
-		log: {
+			return new Boolean(propertyValue)
+			
+		case 'coordinateframe':
+		
+			// Convert the CFrame Proproty
+			return new RoTypes.CFrame(
+				Number(property.X), 
+				Number(property.Y), 
+				Number(property.Z), 
+				Number(property.R00), 
+				Number(property.R01), 
+				Number(property.R02), 
+				Number(property.R10), 
+				Number(property.R11), 
+				Number(property.R12), 
+				Number(property.R20), 
+				Number(property.R21), 
+				Number(property.R22)
+			);		
+		case 'color3uint8':
+		
+			// Add the Color3
+			return new RoTypes.Color3uint8(Number(propertyValue))
+		default:
+			
+			let datatype;
+			
+			catchErr: try {
+				// Create the datatype
+				datatype = new RoTypes[propertyTypeKey]();
+			} 
+			catch(err) { 
+				
+				break catchErr;
+			}
+			
+			for (const datatypeValueKey in datatype) {
+				if (property[datatypeValueKey]) {
+					const newPropertyValue = property[datatypeValueKey];
+					
+					datatype[datatypeValueKey] = JSON.parse(newPropertyValue);
+				}
+			}
 						
-			// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
-			if (_announced.indexOf(propertyTypeKey) != -1) break log;
-	
-			console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`);
-	
-			// Add this to the array to prevent repeat "announcing"
-			_announced.push(propertyTypeKey);
-		}
-
-		return propertyValue
-	  }
-
-      for (const datatypeValueKey in datatype) {
-        
-        if (property[datatypeValueKey]) {
-          const newPropertyValue = property[datatypeValueKey];
-
-          datatype[datatypeValueKey] = JSON.parse(newPropertyValue);
-        }
-      }
-
-      return datatype
-  }
+			break; 
+	}
 }
 
 export { BasePart, BaseVector, CFrame, Color3, Color3uint8, FormFactorPart, GuiService, InputType, Instance, Material, Model, PVInstance, Parser, Part, PartType, RoClasses, RoEnums, RoModules$1 as RoModules, RoTypes, SurfaceType, Terrain, Vector3, Workspace, _convertPropertyToType, findFirstItemByClassName, isItem, isXMLTag };

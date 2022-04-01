@@ -1,4 +1,4 @@
-import BaseVector from './BaseVector.mjs';
+import { BaseVector }	from './BaseVector.mjs';
 
 /**
  * @inheritdoc
@@ -7,7 +7,7 @@ import BaseVector from './BaseVector.mjs';
  * @shortdescription Colors from 0 - 1
  * @classdesc Color3 is a data type that describes a color using R, G, and B components, which are on the range [0, 1] 
  */
-export default class Color3 extends BaseVector {
+export class Color3 extends BaseVector {
 	constructor(r, g, b) {
 	
 		super(r, g, b);

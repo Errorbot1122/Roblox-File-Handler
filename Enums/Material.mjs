@@ -2,7 +2,7 @@
  * @enum {Number} All of Roblox's materials
  * @shortdescription Materials
  */
-const Material = {
+export const Material = {
 	/** Applies to BasPart only. */
 	Plastic: 256,
 	
@@ -120,5 +120,3 @@ const Material = {
 }
 
 Object.freeze(Material);
-
-export default Material;

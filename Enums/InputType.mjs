@@ -5,7 +5,7 @@
  * 
  * ![Animation of the Sin InputType](https://developer.roblox.com/assets/bltf0a4aa99ce7d70e1/Enum_InputType_Sin.gif)
 */
-const InputType = {
+export const InputType = {
 	/**  Behaves like a weld, and does absolutely nothing. */
 	NoInput: 0,	
 	
@@ -28,5 +28,3 @@ const InputType = {
 }
 
 Object.freeze(InputType);
-
-export default InputType;

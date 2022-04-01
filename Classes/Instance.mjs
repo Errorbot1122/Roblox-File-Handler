@@ -1,12 +1,11 @@
 /**
  * @class 
  * 
- * @shortdescription The base Roblox class
+ * @shortdescription Roblox's base object 
  * @classdesc Instance is the base class for all classes in the Roblox class hierarchy. Every other class that the Roblox engine defines inherits all of the members of Instance. 
  */
-export default class Instance {
-	constructor() {
-		
+export class Instance {
+	constructor() {		
 		// Roblox's Vars
 		
 		/**
@@ -23,13 +22,13 @@ export default class Instance {
 		 * @readonly
 		 * @type {String}
 		 */
-		this.ClassName = "Instance"
+		this.ClassName = this.constructor.name
 		
 		/**
 		 * A non-unique identifier of the Instance
 		 * @type {String}
 		 */
-		this.Name = ""
+		this.Name = this.constructor.name
 		
 		/**
 		 * Determines the hierarchical parent of the Instance

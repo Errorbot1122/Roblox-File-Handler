@@ -26,7 +26,7 @@ export class DeniedError extends Error {
 	}
 }
 
-export default function _errorToCustomError(error) {
+export function _errorToCustomError(error) {
 
 	if (error == null) return
 
