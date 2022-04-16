@@ -121,13 +121,13 @@ export class Parser {
 	 */
 	itemToInstance(item, parent, options) {
 		
-		const defultOptions = {
+		const defaultOptions = {
 			REFIDTOINSTANCE: this.REFIDTOINSTANCE,
 			returnErrors: false
 		}
 		
 		options = {
-			...defultOptions,
+			...defaultOptions,
 			...options
 		}
 
@@ -166,7 +166,7 @@ export class Parser {
 				// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
 				if (_announced.indexOf(returnInstClassName) != -1) break log;
 
-				console.warn(`Instance Class '${returnInstClassName}' is currentlly unsported\n`)
+				console.warn(`Instance Class '${returnInstClassName}' is currently unsupported\n`)
 
 				// Add this to the array to prevent repeat "announcing"
 				_announced.push(returnInstClassName)
@@ -198,7 +198,7 @@ export class Parser {
 			// Set the instances ref-id
 			returnInst.referentId = referentId;
 			
-			// Add the new inst to refrance id, refrence table
+			// Add the new inst to reference id, reference table
 			options.REFIDTOINSTANCE[referentId] = returnInst;
 		}
 		
@@ -228,7 +228,7 @@ export class Parser {
 						// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
 						if (_announced.indexOf(propertyTypeKey) != -1) break log;
 		
-						console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`)
+						console.warn(`Datatype '${propertyTypeKey}' is currently unsupported\n`)
 		
 						// Add this to the array to prevent repeat "announcing"
 						_announced.push(propertyTypeKey)
@@ -299,9 +299,9 @@ export class Parser {
 	}
 
 	/**
-	 * @shortdescription Object(s) => Istance(s)
+	 * @shortdescription Object(s) => Instance(s)
 	 * 
-	 * @param {*} objs - A valed Item into an instance
+	 * @param {*} objs - A valued Item into an instance
 	 * @returns {Instance|Object}
 	 */
 	objToInstance(objs) {
@@ -325,12 +325,12 @@ export class Parser {
 	}
 
 	/**
-	 * Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how roblox dose it)
+	 * Convert any RBXL/RBXM/XML File into a parent/child tree of Instances (Just like how Roblox dose it)
 	 * 
 	 * The callback function's params are:
 	 * 
 	 * errs: An Array of Errors (0 = Read File Error, 1 = Parse Error)
-	 * newInstences: The new array of instances
+	 * newInstances: The new array of instances
 	 * 
 	 * @shortdescription The main file parser
 	 * 
@@ -343,13 +343,13 @@ export class Parser {
 		if (result.roblox) {
 			
 			const nexXMLObj = result.roblox
-			let newInstences = []
+			let newInstances = []
 			
 			const items = nexXMLObj.Item
 			
-			items.forEach(item => newInstences.push(this.itemToInstance(item)))
+			items.forEach(item => newInstances.push(this.itemToInstance(item)))
 				
-			return newInstences
+			return newInstances
 		}
 	}
 }
@@ -367,7 +367,7 @@ export function isXMLTag(xml_Tag) {
 	
 	if (isParsed) {
 
-		// Check if there is eneything inside the tag
+		// Check if there is anything inside the tag
 		for (const keys in xml_Tag) return true
 
 		// If not, return false
@@ -426,7 +426,7 @@ export function findFirstItemByClassName(itemList, className, parent) {
  * @private
  * 
  * @param {*} property 
- * @param {String | Number} propertyTypeKey - The key to select the proptry
+ * @param {String | Number} propertyTypeKey - The key to select the property
  * @param {Object} localREFIDTOINSTANCE - The 'REFIDTOINSTANCE' it will use to find instances
  * @returns {*}
  */
@@ -456,7 +456,7 @@ export function _convertPropertyToType(property, propertyTypeKey, options, local
 			
 		case 'coordinateframe':
 		
-			// Convert the CFrame Proproty
+			// Convert the CFrame Property
 			return new RoTypes.CFrame(
 				Number(property.X), 
 				Number(property.Y), 
@@ -494,7 +494,7 @@ export function _convertPropertyToType(property, propertyTypeKey, options, local
 					// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
 					if (_announced.indexOf(propertyTypeKey) != -1) break log;
 					
-					console.warn(`Datatype '${propertyTypeKey}' is currentlly unsported\n`)
+					console.warn(`Datatype '${propertyTypeKey}' is currently unsupported\n`)
 					
 					// Add this to the array to prevent repeat "announcing"
 					_announced.push(propertyTypeKey)
