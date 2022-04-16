@@ -74,8 +74,8 @@ const packageName				= 'Roblox File Parser';
 const logMode					= 0
 
 /**
- * @shortdescription If you want to end the fuction if an error occors
- * Throw eny error the occures, no mater how miniscule it might be
+ * @shortdescription If you want to end the function if an error occurs
+ * Throw eny error the occurs, no mater how miniscule it might be
  * 
  * @type {Boolean}
  **/
@@ -85,7 +85,7 @@ export class Parser {
 	constructor() {
 		/**
 		 * @shortdescription instance look-up table
-		 * @description The look-up table for all instances that exist (by Refrance id)
+		 * @description The look-up table for all instances that exist (by reference id)
 		 * 
 		 * @type {Object}
 		 */
@@ -111,7 +111,7 @@ export class Parser {
 
 	/**
 	 * @shortdescription Item => Instance
-	 * @description Convert an parsed XML Item into a valid roblox Instance if posible
+	 * @description Convert an parsed XML Item into a valid Roblox Instance if possible
 	 * 
 	 * @param {Item} item - The Item you want convert
 	 * @param {String|Item|RoClasses.Instance} parent - The item's parent
