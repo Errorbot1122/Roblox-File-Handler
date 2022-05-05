@@ -38,10 +38,3 @@ describe('MAIN', () => {
 		it('can create instance', done =>						done(assert(new rbxPaser.Instance())))
 	})
 })
-
-// describe('BUILDS', () => {
-// 	it('Normal build exists',							exists('builds/robloxFileHandler.js', () => done()))
-// 	it('Minifided build exists',						exists('builds/robloxFileHandler.min.js', () => done()))
-
-// 	it('Minifided build is smaller the normal build',	{done(assert.isAbove(statSync('builds/robloxFileHandler.js').size, statSync('builds/robloxFileHandler.min.js').size, 'HOW!!!!'))})
-// })
