@@ -90,6 +90,8 @@ export class Parser {
 		 * @type {Object}
 		 */
 		this.REFIDTOINSTANCE = {}
+
+		this.throwErrors = false
 		
 	}
 
@@ -123,7 +125,8 @@ export class Parser {
 		
 		const defultOptions = {
 			REFIDTOINSTANCE: this.REFIDTOINSTANCE,
-			returnErrors: false
+			returnErrors: false,
+			returnUnparsed: true
 		}
 		
 		options = {
@@ -146,7 +149,8 @@ export class Parser {
 		const propertyTypes = item.Properties[0];
 		const referentId = item.$.referent;
 		const returnInstClassName = item.$.class;
-		
+
+		// convert the parent to an instance
 		parent = this.itemToInstance(parent)
 		
 		let convertedChildren = []
@@ -157,12 +161,14 @@ export class Parser {
 			// Try to create the inst
 			returnInst = new RoClasses[returnInstClassName]();
 		}
-		catch(err) { 
+		catch(e) { 
+
+			// returns the instance even if it is not parsed			
+			item.isParsed = false
 				
-			if (logMode == 0) return;
-			
 			// Debug logs
 			log: if (logMode >= 1 && logMode <= 4) {
+				
 				// Leave if it has already "announced" that its invalid (prevents repeat "announcing")
 				if (_announced.indexOf(returnInstClassName) != -1) break log;
 
@@ -176,23 +182,19 @@ export class Parser {
 				if (throwErrors) throw _errorToCustomError(e);
 				else console.error(_errorToCustomError(e));
 			}
-			else {
+			else if (logMode !== 0) {
 				if (throwErrors) throw e;
 				else console.error(e);
 			}
-		
-			// returns the instance even if it is not parsed
-			item.isParsed = false;
+
+			if (options.returnUnparsed) return item
 			
-			return item;
-		}4
-		
-		// set isParsed
-		returnInst.isParsed = true
-		
+		}
+				
 		// Set the parent
 		returnInst.Parent = parent;
-		
+
+		// It there is a refrance id, set it and add it to 
 		if (referentId != null) {
 		
 			// Set the instances ref-id
@@ -245,6 +247,8 @@ export class Parser {
 				}
 			});
 		}
+
+		console.log(returnInst)
 		
 		return returnInst;
 	}
@@ -261,7 +265,7 @@ export class Parser {
 		let data, output;
 		
 		// Read the file
-		try {
+		try {			
 			data = fs.readFileSync(path)
 		}
 		catch (e) {
@@ -337,7 +341,7 @@ export class Parser {
 	 * @param {String} path - The path to the file you want to parse
 	 * @returns {Array<Instance|Object>}
 	 */
-	parseFile(path) {
+	parseFile(path, callback) {
 		const result = this.fileToObject(path)
 				
 		if (result.roblox) {
@@ -348,8 +352,13 @@ export class Parser {
 			const items = nexXMLObj.Item
 			
 			items.forEach(item => newInstences.push(this.itemToInstance(item)))
-				
-			return newInstences
+
+			try {
+				callback(newInstences)
+			}
+			catch (e) {
+				return newInstences	
+			}
 		}
 	}
 }

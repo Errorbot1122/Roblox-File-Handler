@@ -1,35 +1,26 @@
 import { exists, statSync } from 'fs'
-import { inspect } from 'util'
+import { inspect }			from 'util'
+import url					from 'url'
+import path					from 'path'
 
-import { assert }		from 'chai'
 
-import * as rbxPaser	from '../index.js'
+import { assert }			from 'chai'
 
-let baseplateParse;
+import * as rbxPaser		from '../index.js'
 
-const baseplateParser	= new rbxPaser.Parser()
-const MechParser		= new rbxPaser.Parser()
+const __filename				= url.fileURLToPath(import.meta.url);
+const __dirname					= path.dirname(__filename);
+
+const baseplateReturn = new rbxPaser.Parser().parseFile(path.resolve(__dirname, './example_files/baseplate.rbxlx'))
+
+//console.log(inspect(baseplateReturn))
 
 // @todo MORE TESTS!!!!
 
 describe('MAIN', () => {
 	
-	describe('parseFile', () => {
-    	it('Exists?', () =>										assert.exists(baseplateParser.parseFile))
-
-		it('Returns object with valid XML?', done =>			done(assert(baseplateParser.parseFile('test/example_files/baseplate.rbxlx'))))
-
-		describe('Read any valid RBXLX file', () => {
-			
-			it('Can parse simple baseplate? (RBXLX)', done =>	done(assert(baseplateParser.parseFile('test/example_files/baseplate.rbxlx'))))
-			it('Can parse simple baseplate? (XML)',	done =>		done(assert(baseplateParser.parseFile('test/example_files/baseplateXML.xml'))))
-			it('Can parse simple baseplate? (TXT)',	done =>		done(assert(baseplateParser.parseFile('test/example_files/baseplateTXT.txt'))))
-		});
-
-		describe('Read diffent file sizes', () => {
-			it('Can parse a large normel RBXLX file', done =>	done(assert(MechParser.parseFile('test/example_files/randomLargeTestMech.rbxlx'))))
-		})
-
+	describe('File Parsing', () => {
+		it('When providing a file, it retuns a list of instances', done =>	done(assert.isArray(baseplateReturn, 'Did not return a list!')))
 	});
 
 	describe('Classes', () => {
